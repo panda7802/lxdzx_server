@@ -20,5 +20,5 @@ from video_manager.views import trans
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^trans/(.*)/$', trans),
+    url(r'^trans/(.*)', trans),
 ]
