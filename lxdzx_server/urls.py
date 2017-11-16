@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from video_manager.views import trans
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^trans/(.*)/$', trans),
 ]
