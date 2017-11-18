@@ -16,9 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from video_manager.views import trans
+from lxdzx_server import settings
+from video_manager.views import *
+from django.views.static import  serve
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^trans/(.*)', trans),
+    url(r'^get_tags/', get_tags),
+    url(r'^get_file/(.*)', get_file),
+    url(r'^get_video_by_tag/(\d*)', get_video_by_tag),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),
 ]
