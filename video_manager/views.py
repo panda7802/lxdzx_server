@@ -4,12 +4,13 @@ from __future__ import unicode_literals
 import json
 # Create your views here.
 import sys
+import traceback
 import urllib
 
 from django.http import HttpResponse, StreamingHttpResponse
 
 from tutils.t_global_data import TGlobalData
-from video_manager.models import Tag, Video
+from video_manager.models import Tag
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -38,14 +39,18 @@ def get_tags(request):
     s = ""
     try:
         all_tags = Tag.objects.all()
+        res = {'success': True, 'msg': ""}
         response_data = []
         for item in all_tags:
-            res_item = {}
-            res_item['name'] = item.title
+            res_item = {'name': item.title}
+            pic_url = urllib.unquote(item.pic_url.url).replace("\\", "/")
+            res_item['pic_url'] = pic_url[pic_url.rindex("/") + 1:]
+            res_item['title'] = item.title
             res_item['desc'] = item.desc
             res_item['id'] = item.id
             response_data.append(res_item)
-        s = json.dumps(response_data)
+        res['data'] = response_data
+        s = json.dumps(res)
         s = eval("u" + "\'" + s + "\'")
     except Exception, e:
         s = "转发URL异常:", e
@@ -56,21 +61,28 @@ def get_tags(request):
 
 # 获取标签
 def get_video_by_tag(request, tag):
-    s = ""
+    s = "[]"
     try:
-        all_videos = Video.objects.filter(id=tag)
+        # 在没有manyToMany的表里面
+        search_tag = Tag.objects.filter(id=tag).first()
+        res = {'success': True, 'msg': ""}
+        if None == search_tag:
+            return HttpResponse(s)
+
+        all_videos = search_tag.video_set.all()
         response_data = []
         for item in all_videos:
-            res_item = {}
-            res_item['title'] = item.title
-            res_item['pic_url'] = urllib.unquote(item.pic_url.url)[len(TGlobalData.STATIC_RECV_PATH):]
+            res_item = {'title': item.title}
+            pic_url = urllib.unquote(item.pic_url.url).replace("\\", "/")
+            res_item['pic_url'] = pic_url[pic_url.rindex("/") + 1:]
             res_item['video_url'] = item.video_url
             res_item['desc'] = item.desc
             response_data.append(res_item)
-        s = json.dumps(response_data)
+        res['data'] = response_data
+        s = json.dumps(res)
         s = eval("u" + "\'" + s + "\'")
     except Exception, e:
         s = "转发URL异常:", e
-        print e
+        print traceback.print_exc()
     finally:
         return HttpResponse(s)

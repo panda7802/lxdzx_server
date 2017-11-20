@@ -33,6 +33,7 @@ class Tag(models.Model):
     """
     标签
     """
+    pic_url = models.FileField('图片', upload_to=TGlobalData.STATIC_RECV_PATH, default="", blank=True)  # 图片
     title = models.CharField('标题', max_length=128, default="", blank=True)  # 标题
     desc = models.CharField('说明', max_length=256, default="", blank=True)  # 说明
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
@@ -73,7 +74,7 @@ class People(models.Model):
     sex = models.IntegerField('性别', choices=SEX_CHOICES, default=0)
     phone = models.CharField('手机号', max_length=64, default="", blank=True)  # 手机号
     wx_name = models.CharField('微信名称', max_length=128, default="", blank=True)  # 微信名称
-    bak_data = models.CharField('备用字段', max_length=128, default="", blank=True)  # 备用字段
+    bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
 
     def __unicode__(self):
         return self.name
@@ -86,6 +87,7 @@ class Video_Record(models.Model):
     video_id = models.ForeignKey(Video)
     people_id = models.ForeignKey(People)
     watch_time = models.DateTimeField('观看时间', default=timezone.now)  # 时间
+    bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
 
     def __unicode__(self):
         try:
@@ -103,6 +105,8 @@ class Video_Score(models.Model):
     video_id = models.ForeignKey(Video)
     people_id = models.ForeignKey(People)
     score = models.FloatField('评分', default=-1)  # 评分
+    comment = models.CharField('评论', max_length=1024, default="", blank=True)
+    bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
 
     def __unicode__(self):
         try:

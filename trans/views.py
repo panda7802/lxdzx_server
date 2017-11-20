@@ -8,7 +8,6 @@ import urllib
 import urllib2
 from json import JSONDecoder
 
-import simplejson as simplejson
 from django.http import HttpResponse
 import sys
 
