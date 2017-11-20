@@ -2,40 +2,17 @@
 from __future__ import unicode_literals
 
 import json
-import urllib
-import urllib2
-
-from django.http import HttpResponse, HttpRequest, StreamingHttpResponse
-from django.shortcuts import render
-
 # Create your views here.
-import logging
 import sys
+import urllib
 
-from tutils import tconf
+from django.http import HttpResponse, StreamingHttpResponse
+
 from tutils.t_global_data import TGlobalData
 from video_manager.models import Tag, Video
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-
-
-# 转发URL
-def trans(request, url):
-    s = ""
-    try:
-        # print "url:", url
-        # 解码两遍URL
-        url = urllib.unquote(url)
-        logging.error("url1 : ----------------" + url)
-        # url = urllib.unquote(url)
-        # logging.info("url2 : " + url)
-        s = urllib2.urlopen(url).read()
-    except Exception, e:
-        s = "转发URL异常:" + url
-        print e
-    finally:
-        return HttpResponse(s)
 
 
 def get_file(request, file_name):

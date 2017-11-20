@@ -17,12 +17,13 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from lxdzx_server import settings
+from trans.views import trans_url
 from video_manager.views import *
-from django.views.static import  serve
+from django.views.static import serve
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^trans/(.*)', trans),
+    url(r'^trans/(.*)', trans_url),
     url(r'^get_tags/', get_tags),
     url(r'^get_file/(.*)', get_file),
     url(r'^get_video_by_tag/(\d*)', get_video_by_tag),
