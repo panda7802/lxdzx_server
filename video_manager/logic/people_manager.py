@@ -31,6 +31,7 @@ def login(request):
         s = t_url_tools.get_response_str(res)
     except Exception, e:
         traceback.print_exc()
-        s = "get_video_by_gjz异常:", e
+        s = t_url_tools.get_response_str({}, success=False, msg="login 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
         return HttpResponse(s)

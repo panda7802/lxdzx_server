@@ -77,7 +77,15 @@ def login(request):
 def play_video(request):
     return logic.play_ctrl.play_video(request)
 
-# 视频播放统计
+
+#根据id获取视频
+def get_video_by_id(request):
+    return logic.video_ctrl.get_video_by_id(request)
+
+# 排序视频
+def get_videos_order(request):
+    return logic.video_ctrl.get_videos_order(request)
+
 
 
 
