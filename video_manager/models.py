@@ -51,6 +51,8 @@ class Video(models.Model):
     video_url = models.CharField('视频地址', max_length=1024, default="", blank=True)  # 视频地址
     desc = models.CharField('描述', max_length=1024, default="", blank=True)  # 描述
     tags = models.ManyToManyField(Tag)  # 标签
+    play_count = models.IntegerField('播放记录', default=0)   #播放记录
+    avg_point = models.FloatField('平均分', default=0)  # 平均分
     upload_time = models.DateTimeField('保存日期', default=timezone.now)  # 时间
     recommend = models.IntegerField('推荐', default=0)  # 推荐，分越高，越推荐
     keywords = models.CharField('关键字(用英文状态下逗号分隔)', max_length=1024, default="", blank=True)  # 关键字

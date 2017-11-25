@@ -11,12 +11,10 @@ from json import JSONDecoder
 from django.http import HttpResponse
 import sys
 
+from django.template.loader import get_template
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
-
-
-# Create your views here.
-
 
 # 转发URL
 def trans_url(request, url):
