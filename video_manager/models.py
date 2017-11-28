@@ -11,24 +11,6 @@ from django.utils import timezone
 from tutils.t_global_data import TGlobalData
 
 
-# class TestPeople(models.Model):
-#     name = models.CharField(max_length=150)
-#     age = models.IntegerField()
-#     desc = models.CharField(max_length=512)
-#
-#     def __str__(self):
-#         return self.name
-#
-#
-# class TestVideo(models.Model):
-#     name = models.CharField(max_length=150)
-#     pic_url = models.CharField(max_length=512)
-#     video_url = models.CharField(max_length=512)
-#
-#     def __str__(self):
-#         return self.name
-
-
 class Tag(models.Model):
     """
     标签
@@ -37,6 +19,7 @@ class Tag(models.Model):
     title = models.CharField('标题', max_length=128, default="", blank=True)  # 标题
     desc = models.CharField('说明', max_length=256, default="", blank=True)  # 说明
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
+    parent_tag_id = models.ForeignKey('self')
 
     def __unicode__(self):
         return self.title
@@ -51,10 +34,11 @@ class Video(models.Model):
     video_url = models.CharField('视频地址', max_length=1024, default="", blank=True)  # 视频地址
     desc = models.CharField('描述', max_length=1024, default="", blank=True)  # 描述
     tags = models.ManyToManyField(Tag)  # 标签
-    play_count = models.IntegerField('播放记录', default=0)   #播放记录
+    play_count = models.IntegerField('播放记录', default=0)  # 播放记录
     avg_point = models.FloatField('平均分', default=0)  # 平均分
     upload_time = models.DateTimeField('保存日期', default=timezone.now)  # 时间
     recommend = models.IntegerField('推荐', default=0)  # 推荐，分越高，越推荐
+    cost_time = models.IntegerField('时长(秒)', default=0)  # 视频时长
     keywords = models.CharField('关键字(用英文状态下逗号分隔)', max_length=1024, default="", blank=True)  # 关键字
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
 
@@ -71,7 +55,7 @@ class People(models.Model):
         (1, '男'),
         (2, '女'),
     )
-    name = models.CharField('标题', max_length=64, default="", blank=True)  # 标题
+    name = models.CharField('姓名', max_length=64, default="", blank=True)  # 姓名
     pwd = models.CharField('密码', max_length=64, default="", blank=True)  # 密码
     sex = models.IntegerField('性别', choices=SEX_CHOICES, default=0)
     phone = models.CharField('手机号', max_length=64, default="", blank=True)  # 手机号
@@ -79,7 +63,7 @@ class People(models.Model):
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
 
     def __unicode__(self):
-        return self.name
+        return self.wx_name
 
 
 class Video_Record(models.Model):
@@ -112,8 +96,14 @@ class Video_Score(models.Model):
 
     def __unicode__(self):
         try:
-            s = People.objects.filter(id=self.video_id)[0]
+            s = People.objects.filter(id=self.video_id).first()
         except Exception, e:
             logging.error(str(e))
             s = "get db err"
         return s
+
+# TODO 人员级别
+
+# TODO 视频分类等级
+
+# TODO 视频等级

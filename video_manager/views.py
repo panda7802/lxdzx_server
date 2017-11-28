@@ -78,15 +78,19 @@ def play_video(request):
     return logic.play_ctrl.play_video(request)
 
 
-#根据id获取视频
+# 根据id获取视频
 def get_video_by_id(request):
     return logic.video_ctrl.get_video_by_id(request)
+
 
 # 排序视频
 def get_videos_order(request):
     return logic.video_ctrl.get_videos_order(request)
 
+# TODO 获取欢迎页面URL
 
+# TODO 记录播放进度
 
+# 统计视频播放量（UI），包括每个视频的播放时间
 
-# TODO 欢迎页
+# 上传视频上次播放位置

@@ -6,6 +6,7 @@ import traceback
 
 from django.http import HttpResponse, StreamingHttpResponse
 from django.template.loader import get_template
+from django.db.models import Q
 
 from tutils import t_url_tools
 from tutils.t_global_data import TGlobalData
@@ -16,12 +17,20 @@ from video_manager.models import Tag, Video, People
 def get_tags(request):
     s = ""
     try:
-        t_url_tools.parse_url(request, False)
+        # http: // 127.0 .0.1:8000 / get_tags?parm = {"tag": 1}
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
 
-        all_tags = Tag.objects.all()
+        tag = int(json_obj['tag'])
+        if tag < 0:
+            all_tags = Tag.objects.all()
+        else:
+            all_tags = Tag.objects.filter(parent_tag_id=tag)
         response_data = []
         for item in all_tags:
-            res_item = {'name': item.title}
+            res_item = {}
             res_item['pic_url'] = t_url_tools.get_file_url(item.pic_url)[1]
             res_item['title'] = item.title
             res_item['desc'] = item.desc
@@ -46,7 +55,7 @@ def get_video_by_tag(request):
             s = t_url_tools.get_session_err_res()
             return
 
-        tag = json_obj['tag']
+        tag = int(json_obj['tag'])
         page = int(json_obj['page'])
         rows = int(json_obj['rows'])
 
@@ -84,7 +93,7 @@ def get_video_by_gjz(request):
             return
 
         gjz = json_obj['gjz']
-        all_videos = Video.objects.filter(title__contains=gjz)
+        all_videos = Video.objects.filter(Q(title__contains=gjz) | Q(desc__contains=gjz))
         response_data = []
         for item in all_videos:
             res_item = {'title': item.title}

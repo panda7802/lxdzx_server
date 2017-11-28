@@ -10,3 +10,168 @@
 2017-11-25 14:35:41,790 [settings:<module>] [DEBUG]- This is debug message
 2017-11-25 14:35:41,792 [settings:<module>] [INFO]- This is info message
 2017-11-25 14:35:41,792 [settings:<module>] [WARNING]- This is warning message
+2017-11-27 20:00:05,940 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:05,953 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:05,956 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:05,959 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:05,963 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:05,964 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:05,967 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:05,970 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:07,990 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,088 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,092 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,095 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,096 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,099 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,101 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,102 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,105 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,108 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,109 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,111 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,114 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,115 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,119 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,121 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,122 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,128 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,130 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,131 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,132 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,134 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,137 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,138 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,141 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,144 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,147 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,148 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,151 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,154 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,155 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,157 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,158 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,160 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,161 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,161 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,161 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,164 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,164 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,165 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:08,167 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,750 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,753 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,755 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,757 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,760 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,763 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,766 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:19,769 [models:__unicode__] [ERROR]- no such column: video_manager_video.cost_time
+2017-11-27 20:00:43,618 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:43,621 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:43,625 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:43,628 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:43,631 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:43,632 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:43,635 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:43,638 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:44,793 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,076 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,079 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,082 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,085 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,088 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,092 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,095 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:00:51,098 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,556 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,561 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,563 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,566 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,569 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,572 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,575 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:48,579 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:01:50,592 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:55,510 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,354 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,357 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,358 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,362 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,365 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,368 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,371 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:58,374 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,755 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,757 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,762 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,765 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,766 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,769 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,773 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:08:59,776 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,598 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,601 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,605 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,607 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,609 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,612 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,615 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:00,618 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,177 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,180 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,184 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,187 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,190 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,193 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,196 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,198 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,417 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,420 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,423 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,424 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,428 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,431 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,436 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:01,440 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,733 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,736 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,740 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,743 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,746 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,749 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,752 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:18,755 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,552 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,555 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,559 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,562 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,565 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,568 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,571 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,573 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,871 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,875 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,881 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,884 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,888 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,891 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,897 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:19,900 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,615 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,618 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,621 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,622 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,625 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,630 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,632 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:20,635 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:55,255 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,897 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,900 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,903 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,904 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,907 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,911 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,914 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-27 20:09:56,917 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'

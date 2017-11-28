@@ -17,7 +17,6 @@ def login(request):
     try:
         json_obj, session_res = t_url_tools.parse_url(request, is_check_session=False)
         wx_name = json_obj['wx_name']
-        # people = People.objects.filter(wx=gjz)
         people = People.objects.filter(wx_name=wx_name)
         people_count = people.__len__()
         if people_count > 0:
