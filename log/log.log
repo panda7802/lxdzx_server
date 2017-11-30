@@ -175,3 +175,17 @@
 2017-11-27 20:09:56,911 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
 2017-11-27 20:09:56,914 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
 2017-11-27 20:09:56,917 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:46:15,684 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:46:23,411 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:46:31,517 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:46:48,443 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:47:14,194 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:47:51,484 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:48:20,677 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:48:38,821 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:49:24,727 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:49:38,522 [models:__unicode__] [ERROR]- int() argument must be a string or a number, not 'Video'
+2017-11-30 21:50:42,963 [models:__unicode__] [ERROR]- global name 'video_id' is not defined
+2017-11-30 21:51:09,404 [models:__unicode__] [ERROR]- global name 'video_id' is not defined
+2017-11-30 21:51:30,220 [models:__unicode__] [ERROR]- global name 'video_id' is not defined
+2017-11-30 21:51:37,808 [models:__unicode__] [ERROR]- global name 'bak_data' is not defined

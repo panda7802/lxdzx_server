@@ -77,10 +77,10 @@ class Video_Record(models.Model):
 
     def __unicode__(self):
         try:
-            s = self.watch_time, "-", People.objects.filter(id=self.video_id)[0]
+            s = "Video_Record"
         except Exception, e:
             logging.error(str(e))
-            s = "get db err"
+            s = "vr get db err"
         return s
 
 

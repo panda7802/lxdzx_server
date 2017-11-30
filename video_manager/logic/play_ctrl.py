@@ -10,6 +10,10 @@ from django.template.loader import get_template
 from tutils import t_url_tools
 from tutils.t_global_data import TGlobalData
 from video_manager.models import *
+from django.forms.models import model_to_dict
+import time
+import sys
+import os
 
 
 def play_video(request):
@@ -47,6 +51,56 @@ def play_video(request):
     except Exception, e:
         traceback.print_exc()
         s = t_url_tools.get_response_str({}, success=False, msg="play_video 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)
+
+
+def add_play_record(request):
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request, is_check_session=False)
+        vid = json_obj['vid']
+        pid = json_obj['pid']
+
+        video_rec = Video_Record()
+        video_rec.video_id = Video.objects.filter(id=vid).first()
+        video_rec.people_id = People.objects.filter(id=pid).first()
+        video_rec.save()
+
+        s = t_url_tools.get_response_str({})
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="add_play_record 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)
+
+
+def get_people_play_record(request):
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request, is_check_session=False)
+        pid = json_obj['pid']
+        people = People.objects.filter(id=pid).first()
+
+        recs = Video_Record.objects.filter(people_id_id=pid).select_related('video_id')  # .order_by("-watch_time")
+
+        response_data = []
+        for item in recs:
+            # print model_to_dict(item)
+            # print item.video_id.title
+            res_item = {'title': item.video_id.title}
+            res_item['pic_url'] = t_url_tools.get_file_url(item.video_id.pic_url)[1]
+            res_item['video_url'] = item.video_id.video_url
+            res_item['desc'] = item.video_id.desc
+            res_item['id'] = item.video_id.id
+            res_item['watch_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(item.watch_time.time().tzname()))
+            response_data.append(res_item)
+        s = t_url_tools.get_response_str(response_data)
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="get_people_play_record 异常",
                                          err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
         return HttpResponse(s)

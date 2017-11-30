@@ -33,5 +33,7 @@ urlpatterns = [
     url(r'^get_videos_oder', get_videos_order),
     url(r'^get_video_by_gjz', get_video_by_gjz),
     url(r'^play_video', play_video),
+    url(r'^add_play_record', add_play_record),
+    url(r'^get_people_play_record', get_people_play_record),
     url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),
 ]
