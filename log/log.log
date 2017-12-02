@@ -189,3 +189,7 @@
 2017-11-30 21:51:09,404 [models:__unicode__] [ERROR]- global name 'video_id' is not defined
 2017-11-30 21:51:30,220 [models:__unicode__] [ERROR]- global name 'video_id' is not defined
 2017-11-30 21:51:37,808 [models:__unicode__] [ERROR]- global name 'bak_data' is not defined
+2017-12-02 14:52:09,357 [views:get_people_fav] [DEBUG]- 33333333333
+2017-12-02 14:54:39,516 [t_url_tools:parse_url] [DEBUG]- /get_people_fav?parm=%7B%22vid%22%3A%224%22%2C%22pid%22%3A%225%22%7D
+2017-12-02 14:55:42,059 [t_url_tools:parse_url] [DEBUG]- /get_people_fav?parm=%7B%22vid%22%3A%224%22%2C%22pid%22%3A%225%22%7D
+2017-12-02 14:55:42,063 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}], "success": true}

@@ -77,7 +77,8 @@ class Video_Record(models.Model):
 
     def __unicode__(self):
         try:
-            s = "Video_Record"
+            s = str(self.watch_time)#"Video_Record" , Video.objects.filter(id=self.video_id_id).first()
+            #s = Video.objects.filter(id=self.video_id_id).first()
         except Exception, e:
             logging.error(str(e))
             s = "vr get db err"
@@ -97,6 +98,23 @@ class Video_Score(models.Model):
     def __unicode__(self):
         try:
             s = People.objects.filter(id=self.video_id).first()
+        except Exception, e:
+            logging.error(str(e))
+            s = "get db err"
+        return s
+
+
+class People_Favorite(models.Model):
+    """
+    收藏
+    """
+    video_id = models.ForeignKey(Video)
+    people_id = models.ForeignKey(People)
+    bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
+
+    def __unicode__(self):
+        try:
+            s = self.video_id.title#People.objects.filter(id=self.video_id).first()
         except Exception, e:
             logging.error(str(e))
             s = "get db err"

@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^$', t_index),
     url(r'^admin/', admin.site.urls),
     url(r'^trans/(.*)', trans_url),
+    url(r'^notice/', notice),
     url(r'^login', login),
     url(r'^get_tags', get_tags),
     url(r'^get_video_by_id', get_video_by_id),
@@ -35,5 +36,8 @@ urlpatterns = [
     url(r'^play_video', play_video),
     url(r'^add_play_record', add_play_record),
     url(r'^get_people_play_record', get_people_play_record),
+    url(r'^do_my_fav', do_my_fav),
+    url(r'^get_people_fav', get_people_fav),
+
     url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),
 ]

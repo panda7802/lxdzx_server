@@ -2,18 +2,13 @@
 
 # 播放控制
 
+import time
 import traceback
 
-from django.http import HttpResponse, StreamingHttpResponse
-from django.template.loader import get_template
+from django.http import HttpResponse
 
 from tutils import t_url_tools
-from tutils.t_global_data import TGlobalData
 from video_manager.models import *
-from django.forms.models import model_to_dict
-import time
-import sys
-import os
 
 
 def play_video(request):
@@ -59,7 +54,11 @@ def play_video(request):
 def add_play_record(request):
     s = "[]"
     try:
-        json_obj, session_res = t_url_tools.parse_url(request, is_check_session=False)
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
+
         vid = json_obj['vid']
         pid = json_obj['pid']
 
@@ -80,11 +79,91 @@ def add_play_record(request):
 def get_people_play_record(request):
     s = "[]"
     try:
-        json_obj, session_res = t_url_tools.parse_url(request, is_check_session=False)
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
+
         pid = json_obj['pid']
         people = People.objects.filter(id=pid).first()
 
-        recs = Video_Record.objects.filter(people_id_id=pid).select_related('video_id')  # .order_by("-watch_time")
+        recs = Video_Record.objects.filter(people_id_id=pid).select_related('video_id').order_by("-watch_time")
+
+        vids = []
+        response_data = []
+        for item in recs:
+            if item.video_id.id in vids:
+                continue
+            else:
+                vids.append(item.video_id.id)
+            # print model_to_dict(item)
+            # print item.video_id.title
+            res_item = {'title': item.video_id.title}
+            res_item['pic_url'] = t_url_tools.get_file_url(item.video_id.pic_url)[1]
+            res_item['video_url'] = item.video_id.video_url
+            res_item['desc'] = item.video_id.desc
+            res_item['id'] = item.video_id.id
+            res_item['watch_time'] = str(item.watch_time)[:str(item.watch_time).index(".")]
+            response_data.append(res_item)
+        s = t_url_tools.get_response_str(response_data)
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="get_people_play_record 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)
+
+
+def do_my_fav(request):
+    """
+    控制我的收藏
+    :param request:
+    :return:
+    """
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
+
+        vid = json_obj['vid']
+        pid = json_obj['pid']
+
+        s = ""
+        pf = People_Favorite.objects.filter(video_id_id=vid).filter(people_id_id=pid).first()
+        if pf is None:
+            pf_new = People_Favorite()
+            pf_new.video_id = Video.objects.filter(id=vid).first()
+            pf_new.people_id = People.objects.filter(id=pid).first()
+            pf_new.save()
+            s = "添加收藏成功"
+        else:
+            pf.delete()
+            s = "删除收藏成功"
+        s = t_url_tools.get_response_str({'res': s})
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="do_my_fav 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)
+
+
+def get_people_fav(request):
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
+        pid = int(json_obj['pid'])
+        vid = int(json_obj['vid'])
+
+        if vid > 0:
+            recs = People_Favorite.objects.filter(people_id_id=pid, video_id_id=vid).select_related('video_id')
+        else:
+            recs = People_Favorite.objects.filter(people_id_id=pid).select_related('video_id')
 
         response_data = []
         for item in recs:
@@ -95,12 +174,11 @@ def get_people_play_record(request):
             res_item['video_url'] = item.video_id.video_url
             res_item['desc'] = item.video_id.desc
             res_item['id'] = item.video_id.id
-            res_item['watch_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(item.watch_time.time().tzname()))
             response_data.append(res_item)
         s = t_url_tools.get_response_str(response_data)
     except Exception, e:
         traceback.print_exc()
-        s = t_url_tools.get_response_str({}, success=False, msg="get_people_play_record 异常",
+        s = t_url_tools.get_response_str({}, success=False, msg="get_people_fav 异常",
                                          err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
         return HttpResponse(s)

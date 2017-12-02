@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 # Create your views here.
+import logging
 import sys
 import traceback
 
@@ -23,6 +24,12 @@ sys.setdefaultencoding('utf-8')
 # Create your views here.
 def t_index(request):
     t = get_template('index.html')
+    s = t.render()
+    return HttpResponse(s)
+
+
+def notice(request):
+    t = get_template('notice.html')
     s = t.render()
     return HttpResponse(s)
 
@@ -88,13 +95,32 @@ def get_video_by_id(request):
 def get_videos_order(request):
     return logic.video_ctrl.get_videos_order(request)
 
+
 #增加播放记录
 def add_play_record(request):
     return logic.play_ctrl.add_play_record(request)
 
+
 def get_people_play_record(request):
     return logic.play_ctrl.get_people_play_record(request)
 
+
+def do_my_fav(request):
+    """
+    删减我的收藏
+    :param request:
+    :return:
+    """
+    return logic.play_ctrl.do_my_fav(request)
+
+
+def get_people_fav(request):
+    """
+    获取是否收藏
+    :param request:
+    :return:
+    """
+    return logic.play_ctrl.get_people_fav(request)
 
 
 # TODO 获取欢迎页面URL
