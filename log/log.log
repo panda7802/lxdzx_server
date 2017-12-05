@@ -193,3 +193,254 @@
 2017-12-02 14:54:39,516 [t_url_tools:parse_url] [DEBUG]- /get_people_fav?parm=%7B%22vid%22%3A%224%22%2C%22pid%22%3A%225%22%7D
 2017-12-02 14:55:42,059 [t_url_tools:parse_url] [DEBUG]- /get_people_fav?parm=%7B%22vid%22%3A%224%22%2C%22pid%22%3A%225%22%7D
 2017-12-02 14:55:42,063 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}], "success": true}
+2017-12-02 14:57:14,526 [t_url_tools:parse_url] [DEBUG]- /get_people_fav?parm=%7B%22vid%22%3A%224%22%2C%22pid%22%3A%225%22%7D
+2017-12-02 14:57:14,530 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}], "success": true}
+2017-12-05 20:00:06,157 [t_url_tools:parse_url] [DEBUG]- /get_people_fav?parm=%7B%22vid%22:2,%22pid%22:1%7D
+2017-12-05 20:00:06,188 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}], "success": true}
+2017-12-05 20:00:07,624 [t_url_tools:parse_url] [DEBUG]- /get_video_by_tag/2
+2017-12-05 20:00:07,671 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_video_by_tag 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 20:19:55,963 [t_url_tools:parse_url] [DEBUG]- /get_video_by_tag?parm=%7B%22tag%22:1,%22page%22:0,%22rows%22:1%7D
+2017-12-05 20:19:55,963 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:20:42,154 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%7D
+2017-12-05 20:20:42,154 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_tags 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 20:21:33,609 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7Btag:0%7D
+2017-12-05 20:21:33,625 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_tags 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 20:28:54,292 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22:-1%7D
+2017-12-05 20:28:54,296 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:28:58,450 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22:2%7D
+2017-12-05 20:28:58,453 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}], "success": true}
+2017-12-05 20:32:35,316 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:32:35,321 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:32:36,526 [t_url_tools:parse_url] [DEBUG]- /get_videos_oder?parm=%7B%22type%22%3A%221%22%2C%22page%22%3A%220%22%2C%22rows%22%3A%22100%22%7D
+2017-12-05 20:32:36,530 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}, {"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}, {"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}, {"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:32:47,460 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:32:47,463 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:32:48,657 [t_url_tools:parse_url] [DEBUG]- /get_videos_oder?parm=%7B%22type%22%3A%221%22%2C%22page%22%3A%220%22%2C%22rows%22%3A%22100%22%7D
+2017-12-05 20:32:48,664 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}, {"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}, {"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}, {"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:32:50,463 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:32:50,467 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:33:03,566 [t_url_tools:parse_url] [DEBUG]- /get_videos_oder?parm=%7B%22type%22%3A%221%22%2C%22page%22%3A%220%22%2C%22rows%22%3A%22100%22%7D
+2017-12-05 20:33:03,571 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}, {"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}, {"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}, {"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:33:26,944 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:33:26,948 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:33:28,209 [t_url_tools:parse_url] [DEBUG]- /get_videos_oder?parm=%7B%22type%22%3A%221%22%2C%22page%22%3A%220%22%2C%22rows%22%3A%22100%22%7D
+2017-12-05 20:33:28,213 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}, {"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}, {"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}, {"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:33:28,851 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:33:28,857 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:33:45,595 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:33:45,598 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:33:46,805 [t_url_tools:parse_url] [DEBUG]- /get_videos_oder?parm=%7B%22type%22%3A%221%22%2C%22page%22%3A%220%22%2C%22rows%22%3A%22100%22%7D
+2017-12-05 20:33:46,809 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}, {"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}, {"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}, {"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:34:01,546 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:34:01,551 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:34:02,515 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:34:02,517 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:34:17,211 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:34:17,214 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:34:18,490 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:34:18,493 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:34:35,197 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:34:35,200 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:34:36,302 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:34:36,305 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:34:58,194 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:34:58,197 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:34:59,503 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:34:59,507 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:35:23,512 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:35:23,515 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:35:24,901 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:35:24,904 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:35:27,835 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:35:27,838 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:35:29,138 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:35:29,141 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:35:38,931 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:35:38,934 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:35:40,227 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:35:40,230 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:36:06,211 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:36:06,214 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:36:07,545 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:36:07,549 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:36:10,901 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:36:10,904 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:36:12,200 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:36:12,203 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:36:24,793 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:36:24,796 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:36:26,105 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:36:26,108 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:36:47,150 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:36:47,153 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:36:48,371 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:36:48,375 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:37:00,456 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:37:00,459 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:37:01,703 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:37:01,707 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:37:03,573 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:37:03,578 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:37:04,828 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:37:04,832 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:37:29,788 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:37:29,790 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:37:30,990 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:37:30,993 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:39:50,401 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:39:50,405 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:39:51,806 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:39:51,811 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:40:09,891 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:40:09,894 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:40:11,286 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:40:11,289 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:41:03,125 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:41:03,128 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:41:04,423 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:41:04,427 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:41:29,305 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:41:29,308 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:41:30,618 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:41:30,622 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:41:49,084 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:41:49,086 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:41:50,145 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:41:50,150 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:42:09,492 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:42:09,494 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:42:10,742 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:42:10,746 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:42:35,046 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:42:35,049 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:42:36,380 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:42:36,384 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:43:03,032 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:43:03,036 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:43:04,698 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:43:04,703 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:43:06,042 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:43:06,052 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:43:20,188 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:43:20,193 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:43:21,131 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:43:21,134 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:45:46,523 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:45:46,526 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:45:47,921 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:45:47,924 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:45:56,809 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:45:56,812 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:45:58,058 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:45:58,061 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:46:02,431 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:46:02,436 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:46:03,609 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:46:03,614 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:46:08,974 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:46:08,977 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:46:10,190 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:46:10,193 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:46:14,385 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:46:14,388 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:46:15,569 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:46:15,572 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:46:23,891 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:46:23,894 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:46:25,085 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:46:25,088 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:46:30,490 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:46:30,494 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:46:32,075 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:46:32,078 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:46:33,265 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:46:33,267 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:47:41,867 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:47:41,872 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:47:43,046 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:47:43,049 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:47:48,112 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:47:48,117 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:47:49,506 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:47:49,509 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:48:11,733 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:48:11,736 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:48:12,726 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:48:12,734 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:48:38,190 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:48:38,193 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:48:39,414 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:48:39,417 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:48:58,578 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:48:58,578 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:48:59,997 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:49:00,000 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:49:06,582 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:49:06,582 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:49:07,578 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:49:07,584 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:49:26,885 [t_url_tools:parse_url] [DEBUG]- /get_videos_oder?parm=%7B%22type%22%3A%221%22%2C%22page%22%3A%220%22%2C%22rows%22%3A%22100%22%7D
+2017-12-05 20:49:26,891 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}, {"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}, {"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}, {"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:49:30,612 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:49:30,615 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:49:31,746 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:49:31,750 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:49:34,871 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:49:34,875 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:49:36,019 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:49:36,023 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:49:40,842 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:49:40,845 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:49:42,059 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:49:42,065 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:50:21,150 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:50:21,154 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:50:22,344 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:50:22,348 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:50:54,573 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:50:54,573 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:50:56,055 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:50:56,058 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:54:36,973 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:54:36,980 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 20:54:39,145 [t_url_tools:parse_url] [DEBUG]- /get_videos_oder?parm=%7B%22type%22%3A%221%22%2C%22page%22%3A%220%22%2C%22rows%22%3A%22100%22%7D
+2017-12-05 20:54:39,150 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 4, "desc": "测试预告", "pic_url": "", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "预告测试"}, {"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}, {"id": 2, "desc": "留学热预告", "pic_url": "logo.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/34b90a1c4564972818457764745/v.f20.mp4", "title": "留学热"}, {"id": 1, "desc": "预告片aaaaaaaaaaaa嗯嗯嗯嗯嗯嗯嗯嗯嗯反反复复付付付付付付付付付付付付付付付付付付付付付", "pic_url": "icon.jpg", "video_url": "http://1255490847.vod2.myqcloud.com/c8532aacvodgzp1255490847/954d2fb24564972818448744323/R8EDOyvKfm8A.mp4", "title": "留学真相预告"}], "success": true}
+2017-12-05 20:55:46,382 [t_url_tools:parse_url] [DEBUG]- /login?parm=%7B%22wx_name%22%3A%22flyPanda%22%7D
+2017-12-05 20:55:46,385 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {"id": 5}, "success": true}
+2017-12-05 20:55:47,555 [t_url_tools:parse_url] [DEBUG]- /get_tags?parm=%7B%22tag%22%3A%22-1%22%7D
+2017-12-05 20:55:47,558 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 1, "desc": "留学的真相预告片", "pic_url": "lx.png", "title": "预告片"}, {"id": 2, "desc": "新版节目", "pic_url": "xqbqj.png", "title": "师夷记"}, {"id": 3, "desc": "vip1可以观看", "pic_url": "yugao.jpg", "title": "会员视频1"}, {"id": 4, "desc": "sonson", "pic_url": "lkq_8vpcxiG.jpg", "title": "son"}], "success": true}
+2017-12-05 21:14:59,285 [t_url_tools:parse_url] [DEBUG]- /statistics_videos
+2017-12-05 21:14:59,286 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:15:20,278 [t_url_tools:parse_url] [DEBUG]- /get_video_by_tag?parm=%7B%22tag%22:2,%22page%22:1,%22rows%22:1%7D
+2017-12-05 21:15:20,282 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"id": 3, "desc": "大师的爱情", "pic_url": "logo_S647hvr.png", "video_url": "http://1255490847.vod2.myqcloud.com/7c7acd54vodtransgzp1255490847/97ea477b4564972818448883922/v.f20.mp4", "title": "大师爱情"}], "success": true}
+2017-12-05 21:15:28,259 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:16:24,487 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:16:44,681 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:17:26,437 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:17:26,437 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:17:44,173 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:17:44,177 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:18:10,880 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:18:10,884 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:18:25,592 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:18:25,596 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:18:39,765 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:18:39,769 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:18:51,344 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:19:54,651 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:19:54,654 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:20:10,776 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:20:10,779 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:20:17,007 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:22:34,092 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:29:08,211 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:29:08,243 [t_url_tools:get_response_str] [DEBUG]- {"msg": "statistics_videos 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:29:25,101 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:29:25,115 [t_url_tools:get_response_str] [DEBUG]- {"msg": "statistics_videos 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-05 21:29:37,631 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:29:42,036 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:32:03,849 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:36:00,634 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:36:43,259 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:36:53,209 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-05 21:37:32,072 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D

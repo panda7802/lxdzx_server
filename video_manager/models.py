@@ -19,7 +19,7 @@ class Tag(models.Model):
     title = models.CharField('标题', max_length=128, default="", blank=True)  # 标题
     desc = models.CharField('说明', max_length=256, default="", blank=True)  # 说明
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
-    parent_tag_id = models.ForeignKey('self')
+    parent_tag_id = models.ForeignKey('self',  null=True, blank=True)
 
     def __unicode__(self):
         return self.title
@@ -77,8 +77,8 @@ class Video_Record(models.Model):
 
     def __unicode__(self):
         try:
-            s = str(self.watch_time)#"Video_Record" , Video.objects.filter(id=self.video_id_id).first()
-            #s = Video.objects.filter(id=self.video_id_id).first()
+            s = str(self.watch_time)  # "Video_Record" , Video.objects.filter(id=self.video_id_id).first()
+            # s = Video.objects.filter(id=self.video_id_id).first()
         except Exception, e:
             logging.error(str(e))
             s = "vr get db err"
@@ -114,7 +114,7 @@ class People_Favorite(models.Model):
 
     def __unicode__(self):
         try:
-            s = self.video_id.title#People.objects.filter(id=self.video_id).first()
+            s = self.video_id.title  # People.objects.filter(id=self.video_id).first()
         except Exception, e:
             logging.error(str(e))
             s = "get db err"

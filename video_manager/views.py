@@ -128,4 +128,5 @@ def get_people_fav(request):
 # TODO 记录播放进度
 
 #TODO 统计视频播放量（UI），包括每个视频的播放时间
-
+def statistics_videos(request):
+    return logic.play_ctrl.statistics_videos(request)

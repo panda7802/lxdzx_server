@@ -1,4 +1,4 @@
-127.0.0.1:8000/get_tags?parm={}
+http://127.0.0.1:8000/get_tags?parm={"tag":-1}
 
 127.0.0.1:8000/get_video_by_tag?parm={"tag":1,"page":0,"rows":1}
 

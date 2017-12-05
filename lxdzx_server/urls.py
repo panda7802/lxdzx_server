@@ -38,6 +38,6 @@ urlpatterns = [
     url(r'^get_people_play_record', get_people_play_record),
     url(r'^do_my_fav', do_my_fav),
     url(r'^get_people_fav', get_people_fav),
-
+    url(r'^statistics_videos', statistics_videos),
     url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),
 ]

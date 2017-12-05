@@ -5,7 +5,9 @@
 import time
 import traceback
 
+from django.db.models import Count
 from django.http import HttpResponse
+from django.template.loader import get_template
 
 from tutils import t_url_tools
 from video_manager.models import *
@@ -179,6 +181,43 @@ def get_people_fav(request):
     except Exception, e:
         traceback.print_exc()
         s = t_url_tools.get_response_str({}, success=False, msg="get_people_fav 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)
+
+
+class Video_Statistics_Model:
+    def __init__(self, title, count, video):
+        self.title = title
+        self.count = count
+        self.video = video
+
+
+# 视频播放量
+def statistics_videos(request):
+    """
+    播放量
+    :param request:
+    :return:
+    """
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request)
+        recs = Video_Record.objects.values_list('video_id').annotate(Count('video_id'))
+
+        response_data = []
+        for item in recs:
+            video = Video.objects.filter(id=item[0]).first()
+            count = item[1]
+            video.play_count = count
+            video.save()
+            res_item = Video_Statistics_Model(video.title, count, video)  # {'video': video, "count": count}
+            response_data.append(res_item)
+        t = get_template('statistics.html')
+        s = t.render({'res': response_data})
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="statistics_videos 异常",
                                          err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
         return HttpResponse(s)
