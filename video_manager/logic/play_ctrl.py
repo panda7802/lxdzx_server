@@ -221,3 +221,83 @@ def statistics_videos(request):
                                          err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
         return HttpResponse(s)
+
+
+def add_video_comment(request):
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
+
+        vid = json_obj['vid']
+        pid = json_obj['pid']
+        comment = json_obj['comment']
+        parentid = json_obj['parentid']
+
+        video_comment = Video_Comment()
+        video_comment.video_id = Video.objects.filter(id=vid).first()
+        video_comment.people_id = People.objects.filter(id=pid).first()
+        video_comment.comment = comment
+        if int(parentid) > 0:
+            video_comment.parent_comment_id_id = parentid
+        video_comment.save()
+
+        s = t_url_tools.get_response_str({})
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="add_video_comment 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)
+
+
+def get_video_comment(request):
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
+
+        vid = json_obj['vid']
+        parentid = json_obj['parentid']
+        if int(parentid) > 0:
+            vcs = Video_Comment.objects.filter(parent_comment_id_id=parentid).order_by("-is_top").order_by(
+                "comment_time")
+        else:
+            vcs = Video_Comment.objects.filter(video_id_id=vid).order_by("-is_top").order_by("comment_time")
+
+        response_data = []
+        for item in vcs:
+            res_item = {'comment': item.comment, 'id': item.id}
+            response_data.append(res_item)
+        s = t_url_tools.get_response_str(response_data)
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="get_people_play_record 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)
+
+
+def del_video_comment(request):
+    s = "[]"
+    try:
+        json_obj, session_res = t_url_tools.parse_url(request)
+        if not session_res:
+            s = t_url_tools.get_session_err_res()
+            return
+
+        id = json_obj['id']
+
+        video_comment = Video_Comment.objects.filter(id=id).first()
+        video_comment.delete()
+        s = t_url_tools.get_response_str({})
+    except Exception, e:
+        traceback.print_exc()
+        s = t_url_tools.get_response_str({}, success=False, msg="add_video_comment 异常",
+                                         err_code=t_url_tools.ERR_CODE_EXCEPTION)
+    finally:
+        return HttpResponse(s)

@@ -39,5 +39,8 @@ urlpatterns = [
     url(r'^do_my_fav', do_my_fav),
     url(r'^get_people_fav', get_people_fav),
     url(r'^statistics_videos', statistics_videos),
+    url(r'^add_video_comment', add_video_comment),
+    url(r'^del_video_comment', del_video_comment),
+    url(r'^get_video_comment', get_video_comment),
     url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),
 ]

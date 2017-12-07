@@ -21,6 +21,14 @@ String.prototype.format = function(args) {
 }
 
 
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+
+
 var poems = new Array("鸿雁在云鱼在水，惆怅此情难寄",//
 "离恨却如春草，更行更远还生",//
 "欲寄彩笺兼尺素，山长水阔知何处",//

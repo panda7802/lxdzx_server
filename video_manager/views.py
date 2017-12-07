@@ -2,20 +2,15 @@
 from __future__ import unicode_literals
 
 # Create your views here.
-import logging
 import sys
-import traceback
 
 from django.http import HttpResponse, StreamingHttpResponse
 from django.template.loader import get_template
 
-from tutils import t_url_tools
-from tutils.t_global_data import TGlobalData
-from video_manager.models import Tag, Video, People
-
 import logic.people_manager
-import logic.video_ctrl
 import logic.play_ctrl
+import logic.video_ctrl
+from tutils.t_global_data import TGlobalData
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -90,13 +85,12 @@ def get_video_by_id(request):
     return logic.video_ctrl.get_video_by_id(request)
 
 
-
 # 排序视频
 def get_videos_order(request):
     return logic.video_ctrl.get_videos_order(request)
 
 
-#增加播放记录
+# 增加播放记录
 def add_play_record(request):
     return logic.play_ctrl.add_play_record(request)
 
@@ -127,6 +121,20 @@ def get_people_fav(request):
 
 # TODO 记录播放进度
 
-#TODO 统计视频播放量（UI），包括每个视频的播放时间
+# TODO 统计视频播放量（UI），包括每个视频的播放时间
 def statistics_videos(request):
     return logic.play_ctrl.statistics_videos(request)
+
+
+def add_video_comment(request):
+    return logic.play_ctrl.add_video_comment(request)
+
+
+def del_video_comment(request):
+    return logic.play_ctrl.del_video_comment(request)
+
+
+def get_video_comment(request):
+    return logic.play_ctrl.get_video_comment(request)
+
+

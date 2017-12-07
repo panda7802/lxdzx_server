@@ -444,3 +444,35 @@
 2017-12-05 21:36:43,259 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
 2017-12-05 21:36:53,209 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
 2017-12-05 21:37:32,072 [t_url_tools:parse_url] [DEBUG]- /statistics_videos?parm=%7B%7D
+2017-12-07 16:58:43,625 [t_url_tools:parse_url] [DEBUG]- /add_video_comment?parm=%7B%22vid%22:2,%22pid%22:1,%22comment%22:%22%E9%98%BF%E6%96%AF%E9%A1%BF%E5%8F%91%E5%A4%A7%E6%B0%B4%22,%22parentid%22:0%7D
+2017-12-07 16:58:43,680 [t_url_tools:get_response_str] [DEBUG]- {"msg": "add_video_comment 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-07 17:01:56,769 [t_url_tools:parse_url] [DEBUG]- /add_video_comment?parm=%7B%22vid%22:2,%22pid%22:2,%22comment%22:%22%E9%98%BF%E6%96%AF%E9%A1%BF%E5%8F%91%E5%A4%A7%E6%B0%B4%22,%22parentid%22:0%7D
+2017-12-07 17:01:56,884 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-07 17:03:15,213 [t_url_tools:parse_url] [DEBUG]- /add_video_comment?parm=%7B%22vid%22:2,%22pid%22:2,%22comment%22:%22%E9%98%BF%E6%96%AF%E9%A1%BF%E5%8F%91%E5%A4%A7%E6%B0%B4%22,%22parentid%22:2%7D
+2017-12-07 17:03:15,321 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-07 17:04:27,302 [t_url_tools:parse_url] [DEBUG]- /add_video_comment?parm=%7B%22vid%22:2,%22pid%22:2,%22comment%22:%22%E9%98%BF%E6%96%AF%E9%A1%BF%E5%8F%91%E5%A4%A7%E6%B0%B4%22,%22parentid%22:2%7D
+2017-12-07 17:04:27,411 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-07 17:04:58,226 [t_url_tools:parse_url] [DEBUG]- /add_video_comment?parm=%7B%22vid%22:2,%22pid%22:2,%22comment%22:%22333%22,%22parentid%22:2%7D
+2017-12-07 17:04:58,464 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-07 17:18:10,111 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:2%7D
+2017-12-07 17:18:10,160 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-07 17:18:52,243 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:2%7D
+2017-12-07 17:18:52,249 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-07 17:19:44,055 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:2%7D
+2017-12-07 17:19:44,062 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"comment": "阿斯顿发大水3", "id": 3}, {"comment": "333", "id": 5}, {"comment": "阿斯顿发大水4", "id": 4}], "success": true}
+2017-12-07 17:19:58,454 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:2%7D
+2017-12-07 17:19:58,461 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"comment": "阿斯顿发大水3", "id": 3}, {"comment": "333", "id": 5}, {"comment": "阿斯顿发大水4", "id": 4}], "success": true}
+2017-12-07 17:20:25,500 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:2%7D
+2017-12-07 17:20:25,513 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"comment": "333", "id": 5}, {"comment": "阿斯顿发大水3", "id": 3}, {"comment": "阿斯顿发大水4", "id": 4}], "success": true}
+2017-12-07 17:20:30,489 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:0%7D
+2017-12-07 17:20:30,496 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"comment": "333", "id": 5}, {"comment": "阿斯顿发大水", "id": 2}, {"comment": "阿斯顿发大水3", "id": 3}, {"comment": "阿斯顿发大水4", "id": 4}], "success": true}
+2017-12-07 17:22:34,206 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2%22,parentid%22:2%7D
+2017-12-07 17:22:34,246 [t_url_tools:get_response_str] [DEBUG]- {"msg": "get_people_play_record 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-07 17:23:19,059 [t_url_tools:parse_url] [DEBUG]- /del_video_comment?parm=%7B%22id%22:3%7D
+2017-12-07 17:23:19,246 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-07 17:23:21,901 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:0%7D
+2017-12-07 17:23:21,907 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [{"comment": "333", "id": 5}, {"comment": "阿斯顿发大水", "id": 2}, {"comment": "阿斯顿发大水4", "id": 4}], "success": true}
+2017-12-07 17:23:27,500 [t_url_tools:parse_url] [DEBUG]- /del_video_comment?parm=%7B%22id%22:2%7D
+2017-12-07 17:23:27,634 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-07 17:23:29,326 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:0%7D
+2017-12-07 17:23:29,341 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [], "success": true}

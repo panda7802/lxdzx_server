@@ -19,10 +19,10 @@ class Tag(models.Model):
     title = models.CharField('标题', max_length=128, default="", blank=True)  # 标题
     desc = models.CharField('说明', max_length=256, default="", blank=True)  # 说明
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
-    parent_tag_id = models.ForeignKey('self',  null=True, blank=True)
+    parent_tag_id = models.ForeignKey('self', null=True, blank=True)
 
     def __unicode__(self):
-        return self.title
+        return str(self.id) + "." + self.title
 
 
 class Video(models.Model):
@@ -43,7 +43,7 @@ class Video(models.Model):
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
 
     def __unicode__(self):
-        return self.title
+        return str(self.id) + "." + self.title
 
 
 class People(models.Model):
@@ -89,10 +89,16 @@ class Video_Score(models.Model):
     """
     评分
     """
+    GOOD_CHOICES = (
+        (0, '未录入'),
+        (1, '赞'),
+        (2, 'low'),
+    )
     video_id = models.ForeignKey(Video)
     people_id = models.ForeignKey(People)
     score = models.FloatField('评分', default=-1)  # 评分
-    comment = models.CharField('评论', max_length=1024, default="", blank=True)
+    good = models.IntegerField('点赞', choices=GOOD_CHOICES, default=0)
+    # comment = models.CharField('评论', max_length=1024, default="", blank=True)
     bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
 
     def __unicode__(self):
@@ -120,8 +126,32 @@ class People_Favorite(models.Model):
             s = "get db err"
         return s
 
+
+#视频评论
+class Video_Comment(models.Model):
+    video_id = models.ForeignKey(Video)
+    people_id = models.ForeignKey(People)
+    comment = models.CharField('评论', max_length=1024, default="", blank=True)
+    parent_comment_id = models.ForeignKey('self', null=True, blank=True)
+    comment_time = models.DateTimeField('评论时间', default=timezone.now)  # 时间
+    is_top = models.IntegerField('置顶',  default=0)
+    bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
+
+    def __unicode__(self):
+        try:
+            s = self.video_id.title + " : " + self.comment
+        except Exception, e:
+            logging.error(str(e))
+            s = "get db err"
+        return s
+
+
 # TODO 人员级别
+
+
 
 # TODO 视频分类等级
 
 # TODO 视频等级
+
+

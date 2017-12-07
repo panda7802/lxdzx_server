@@ -101,7 +101,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+#     "default": {
+# #   "lxdzx": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "lxdzx",
+#         "USER": "root",
+#         "PASSWORD": "root!@#$",
+#         "HOST": "",
+#         "PORT": "",
+#     },
 }
 
 # Password validation

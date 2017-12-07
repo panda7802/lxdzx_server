@@ -21,3 +21,10 @@ http://127.0.0.1:8000/get_people_play_record?parm={"pid":1}
 http://127.0.0.1:8000/do_my_fav?parm={"vid":2,"pid":1}
 
 http://127.0.0.1:8000/get_people_fav?parm={"vid":2,"pid":1}
+
+http://127.0.0.1:8000/add_video_comment?parm={"vid":2,"pid":2,"comment":"阿斯顿发大水","parentid":0}
+http://127.0.0.1:8000/add_video_comment?parm={"vid":2,"pid":2,"comment":"333","parentid":2}
+
+http://127.0.0.1:8000/get_video_comment?parm={"vid":2,"parentid":2}
+
+http://127.0.0.1:8000/del_video_comment?parm={"id":3}
