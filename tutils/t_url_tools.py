@@ -20,7 +20,7 @@ def check_session(json_obj):
 
 # 解析url
 def parse_url(request, is_check_session=True):
-    logging.debug(request.get_full_path())
+    # logging.debug(request.get_full_path())
     parm = request.GET.get('parm')
     json_obj = JSONDecoder().decode(urllib.unquote(parm))
     res_session = True
@@ -53,7 +53,7 @@ def get_response_str(response_data, success=True, msg="", err_code=0):
         res['data'] = {}
     s = json.dumps(res)
     s = eval("u" + "\'" + s + "\'")
-    logging.debug(s)
+    # logging.debug(s)
     return s
 
 

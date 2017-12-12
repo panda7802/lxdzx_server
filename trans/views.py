@@ -16,6 +16,7 @@ from django.template.loader import get_template
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
 # 转发URL
 def trans_url(request, url):
     s = ""
