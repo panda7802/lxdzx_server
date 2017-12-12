@@ -21,10 +21,10 @@ String.prototype.format = function (args) {
 };
 
 
-function GetQueryString(name) {
+function get_query_string(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if (r !== null) return unescape(r[2]);
+    if (r !== null) return decodeURIComponent(r[2]);
     return "";
 }
 

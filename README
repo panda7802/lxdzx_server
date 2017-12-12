@@ -27,4 +27,4 @@ http://127.0.0.1:8000/add_video_comment?parm={"vid":2,"pid":2,"comment":"333","p
 
 http://127.0.0.1:8000/get_video_comment?parm={"vid":2,"parentid":2}
 
-http://127.0.0.1:8000/del_video_comment?parm={"id":3}
+http://127.0.0.1:8000/?say_title=这是我们奋斗的时光&say_jy=奋斗直到永远&say_people=留学的真相
