@@ -21,11 +21,13 @@ String.prototype.format = function (args) {
 };
 
 
-function get_query_string(name) {
+function get_query_string(name, def) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if (r !== null) return decodeURIComponent(r[2]);
-    return "";
+    if (r !== null) {
+        return decodeURIComponent(r[2])
+    }
+    return def === null ? "" : def;
 }
 
 

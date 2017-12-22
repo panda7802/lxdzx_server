@@ -23,10 +23,12 @@ from django.views.static import serve
 
 urlpatterns = [
     url(r'^$', t_index),
+    url(r'^t_test_amaze/', t_test_amaze),
+    url(r'^test_layui/(.*)', t_test_layui),
     url(r'^admin/', admin.site.urls),
     url(r'^trans/(.*)', trans_url),
     url(r'^notice/', notice),
-    url(r'^login', login),
+    # url(r'^login', login),
     url(r'^lxdzx/(.*)', lxdzx),
     url(r'^lxdzx_show/(.*)', lxdzx_show),
     url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),

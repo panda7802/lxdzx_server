@@ -476,3 +476,5 @@
 2017-12-07 17:23:27,634 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": {}, "success": true}
 2017-12-07 17:23:29,326 [t_url_tools:parse_url] [DEBUG]- /get_video_comment?parm=%7B%22vid%22:2,%22parentid%22:0%7D
 2017-12-07 17:23:29,341 [t_url_tools:get_response_str] [DEBUG]- {"msg": "", "data": [], "success": true}
+2017-12-21 10:28:14,391 [views:lxdzx] [DEBUG]- 192.168.3.246:8000 -- /lxdzx/login
+2017-12-21 10:28:14,460 [views:lxdzx] [DEBUG]- {"msg": "login 异常", "data": {}, "errcode": 4, "success": false}
