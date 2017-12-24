@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>我的留学</title>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
     <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
@@ -15,63 +17,115 @@
     <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
         <img id="img_back" src="/static/img/xnjy/{{ ui_type }}/input.jpg">
     </div>
-    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 2">
-        <button style="margin: 30% 0 0 50%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
-                onclick="goto_page(1)">
-            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我是留学生</b></div>
-        </button>
-
-        <button style="margin: 20% 0 0 50%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
-                onclick="goto_page(2)">
-            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我是准留学生</b></div>
-        </button>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:inline">
+            <input id="input_wx_name" class="layui-input-block" type="text" name="title" placeholder="请输入您的微信名"
+                   value="{{ xnjy.people_id.wx_name }}" autocomplete="off"
+                   style="margin: 38% 0 0 27%;height: 5.2%;width: 28%;padding-left: 4px;border-radius:8px">
+            <img src="/static/img/search.png" style="height: 5%;" onclick="get_value()">
+        </div>
+        <input class="layui-input-block" style="margin: 8% 0 0 10%;width: 38%;padding-left: 10px;border-radius:8px"
+               id="input_lx_time"/>
+        <textarea class="layui-input-block"
+                  style="margin: 15% 0 0 10%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;"
+                  id="input_school" placeholder="请输入您的学校">{{ xnjy.people_id.school }}</textarea>
+        <textarea class="layui-input-block"
+                  style="margin: 14% 0 0 10%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;"
+                  id="input_jy" placeholder="对自己说的话和未来的展望" value="33333333">444444{{ xnjy.people_id.jy }}</textarea>
+        <div id="div_cont" style="width: 100%;margin-top: 5%;text-align: center">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
     </div>
 </div>
 <script>
-    var bl = 1.0;
-    var back = document.getElementById('div_back');
-    var back_height = $(back).height();
-    var back_width = $(back).width();
-    bl = back_height / 1920.0;
+    xnjy_init();
 
-    var img_back = document.getElementById('img_back');
-    img_back.style.height = back_height + "px";
-    img_back.style.width = back_height * 0.5625 + "px";
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
 
-    var div_cont = document.getElementById('div_cont');
-    div_cont.style.height = back_height + "px";
-    div_cont.style.width = back_height * 0.5625 + "px";
-    div_cont.style.marginLeft = (back_width - back_height * 0.5625 ) / 2 + "px";
+        var lx_time = {{ xnjy.lx_time }}+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
 
 
-    function goto_page(index) {
-        safd
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
     }
 
-    {#    layui.use('laydate', function () {#}
-    {#        var laydate = layui.laydate;#}
-    {##}
-    {#        //执行一个laydate实例#}
-    {#        laydate.render({#}
-    {#            elem: '#test1' //指定元素#}
-    {#        });#}
-    {#        laydate.render({#}
-    {#            elem: '#lx_time',#}
-    {#            format: 'yyyy 年 MM 月 dd 日',#}
-    {#            value: '2017 年 12 月 22 日' //必须遵循format参数设定的格式#}
-    {#        });#}
-    {#    });#}
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
 
-    {#    function test() {#}
-    {#        console.log(document.getElementById("lx_time").innerHTML)#}
-    {#    }#}
+    }
 
-</script>
-<script>
-    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function () {
-        var element = layui.element;
-    });
 </script>
 </body>
 </html>

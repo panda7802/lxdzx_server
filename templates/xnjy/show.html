@@ -2,76 +2,200 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="max-age=0"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>我的留学</title>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
     <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
     <script src="/static/layui/layui.js"></script>
 </head>
 <body>
+<style type="text/css">
+    .lx_time {
+        font-size: 28pt;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+    }
+
+    .lx_unit {
+        color: #fff;
+        font-size: 12pt;
+        text-align: center;
+    }
+
+    .lx_line {
+        width: 22%;
+        padding: 0;
+        margin: 10px 0 0 0;
+        float: left
+    }
+
+    .lx_dot {
+        width: 2%;
+        height: 20%;
+        float: left;
+        color: #fff;
+        font-size: 16pt;
+        padding: 0;
+        margin: 8% 2px 0 2px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
 <div>
     <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
-        <img id="img_back" src="/static/img/xnjy/{{ ui_type }}/index.jpg">
+        <img id="img_back" src="/static/img/xnjy/{{ ui_type }}/show.jpg">
     </div>
     <div id="div_cont" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 2">
-        <button style="margin: 30% 0 0 50%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
-                onclick="goto_page(1)">
-            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我是留学生</b></div>
-        </button>
-
-        <button style="margin: 20% 0 0 50%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
-                onclick="goto_page(2)">
-            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我是准留学生</b></div>
+        <fieldset class="layui-elem-field"
+                  style="width: 85%;height: 18%;margin: 70% 0 0 5%;border-color: #aaa;padding:10px;border-radius:8px;">
+            <legend id="lx_title" style="color: #fff;font-weight: bold">我在 {{ xnjy.school }} 已经待了</legend>
+            <div class="layui-field-box" style="display:inline;text-align: center;width: 100%">
+                {#                <div id="time_year" class="lx_line">#}
+                {#                    <div class="lx_time" id="year">00</div>#}
+                {#                    <div class="lx_unit">年</div>#}
+                {#                </div>#}
+                {#                <div class="lx_dot">:</div>#}
+                {#                <div id="time_month" class="lx_line">#}
+                {#                    <div class="lx_time" id="month">00</div>#}
+                {#                    <div class="lx_unit">月</div>#}
+                {#                </div>#}
+                {#                <div class="lx_dot">:</div>#}
+                <div id="time_dat" class="lx_line">
+                    <div class="lx_time" id="day">00</div>
+                    <div class="lx_unit">日</div>
+                </div>
+                <div class="lx_dot">:</div>
+                <div id="time_year" class="lx_line">
+                    <div class="lx_time" id="hour">00</div>
+                    <div class="lx_unit">时</div>
+                </div>
+                <div class="lx_dot">:</div>
+                <div id="time_year" class="lx_line">
+                    <div class="lx_time" id="min">00</div>
+                    <div class="lx_unit">分</div>
+                </div>
+                <div class="lx_dot">:</div>
+                <div id="time_year" class="lx_line">
+                    <div class="lx_time" id="second">00</div>
+                    <div class="lx_unit">秒</div>
+                </div>
+            </div>
+        </fieldset>
+        <div style="height: 20%">
+            <div style="color: white;font-family:'宋体';margin-top: 10px;font-weight: bold">
+                {{ xnjy.jy }}
+            </div>
+            <div id="lx_wx_name" style="color: white;font-family:'宋体';margin-top: 10px;width: 100%;font-weight: bold">
+                --
+            </div>
+        </div>
+        <button style="margin: 15% 50% 0 0%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
+                onclick="goto_page()">
+            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我也试试</b></div>
         </button>
     </div>
 </div>
 <script>
-    var bl = 1.0;
-    var back = document.getElementById('div_back');
-    var back_height = $(back).height();
-    var back_width = $(back).width();
-    bl = back_height / 1920.0;
+    xnjy_init();
 
-    var img_back = document.getElementById('img_back');
-    img_back.style.height = back_height + "px";
-    img_back.style.width = back_height * 0.5625 + "px";
+    var parm = get_query_string("parm", "");
+    var data = JSON.parse(parm);
+    document.getElementById('lx_wx_name').innerHTML = "---" + data.wx_name;
 
-    var div_cont = document.getElementById('div_cont');
-    div_cont.style.height = back_height + "px";
-    div_cont.style.width = back_height * 0.5625 + "px";
-    div_cont.style.marginLeft = (back_width - back_height * 0.5625 ) / 2 + "px";
+    var send_data = Object();
+    send_data.ui_type = data.ui_type;
 
-
-    function goto_page(index) {
-        safd
+    function goto_page() {
+        window.location.href = 'xnjy_index?parm=' + JSON.stringify(send_data);
     }
 
-    {#    layui.use('laydate', function () {#}
-    {#        var laydate = layui.laydate;#}
-    {##}
-    {#        //执行一个laydate实例#}
-    {#        laydate.render({#}
-    {#            elem: '#test1' //指定元素#}
-    {#        });#}
-    {#        laydate.render({#}
-    {#            elem: '#lx_time',#}
-    {#            format: 'yyyy 年 MM 月 dd 日',#}
-    {#            value: '2017 年 12 月 22 日' //必须遵循format参数设定的格式#}
-    {#        });#}
-    {#    });#}
+    var date1 = new Date();
 
-    {#    function test() {#}
-    {#        console.log(document.getElementById("lx_time").innerHTML)#}
-    {#    }#}
+    function show_time() {
+        var date2 = new Date();    //结束时间
+        var date3 = date2.getTime() - date1.getTime();   //时间差的毫秒数
+        var school = data.school;
+        if (date3 > 0) {
+            document.getElementById('lx_title').innerHTML = "我在 " + school + " 已经待了";
+        } else {
+            date3 = 0 - date3;
+            document.getElementById('lx_title').innerHTML = "我距离去 " + school + " 还有";
+        }
+        {#            //计算出相差年数#}
+        {#            var years = parseInt(date3 / (24 * 3600 * 1000 * 30 * 365)); //Math.abs((date1.getFullYear() - date2.getFullYear()));#}
+        {#            //计算出相差月数#}
+        {#            var months = parseInt(date3 /  (24 * 3600 * 1000 * 30 * 365)); //Math.abs((date1.getMonth() - date2.getMonth()));#}
+        //计算出相差天数
+        var days = parseInt(date3 / (1000 * 60 * 60 * 24)); //Math.abs((date1.getDate() - date2.getDate()));
+        //计算出小时数
+        var leave1 = date3 % (24 * 3600 * 1000);   //计算天数后剩余的毫秒数
+        var hours = Math.floor(leave1 / (3600 * 1000));
+        //计算相差分钟数
+        var leave2 = leave1 % (3600 * 1000);    //计算小时数后剩余的毫秒数
+        var minutes = Math.floor(leave2 / (60 * 1000));
+        //计算相差秒数
+        var leave3 = leave2 % (60 * 1000) - 1; //计算分钟数后剩余的毫秒数
+        var seconds = Math.round(leave3 / 1000);
+        {#            document.getElementById('year').innerHTML = years + "";#}
+        {#            document.getElementById('month').innerHTML = months + "";#}
+        document.getElementById('day').innerHTML = days + "";
+        document.getElementById('hour').innerHTML = hours + "";
+        document.getElementById('min').innerHTML = minutes + "";
+        document.getElementById('second').innerHTML = seconds + "";
+    }
 
-</script>
-<script>
-    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function () {
-        var element = layui.element;
-    });
+    /**
+     * 开始计时
+     */
+    function start_count_time(data) {
+//计算日期差
+        var lx_time = data.lx_time;
+        date1 = lx_time.substring(0, 4) + '/' + lx_time.substring(4, 6) + '/' + lx_time.substring(6, 8) + ' 00:00:00';  //开始时间
+        date1 = new Date(date1);
+
+        //------------------------------
+        show_time();
+        var funId = setInterval(function () {
+            show_time();
+        }, 1000);
+
+
+    }
+
+    function init_data() {
+        var wx_name = data.wx_name;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    start_count_time(res);
+                }
+            }
+        });
+    }
+
+    init_data();
+
+
 </script>
 </body>
 </html>

@@ -21,8 +21,8 @@ def xnjy_save_xnjy(json_obj):
     else:
         people = people.first()
 
-    xnjy = Xnjy.objects.filter(people_id=people)
-    if xnjy.__len__() <= 0:
+    xnjy = Xnjy.objects.filter(people_id=people).first()
+    if xnjy is None:
         xnjy = Xnjy()
     xnjy.school = json_obj['school']
     xnjy.jy = json_obj['jy']
@@ -103,9 +103,10 @@ def xnjy_input(request):
 
     xnjy = Xnjy.objects.filter(people_id__wx_name=wx_name).first()
     if xnjy is None:
+        print xnjy
         xnjy = Xnjy()
     t = get_template('xnjy/input.html')
-    s = t.render({'xnjy': xnjy})
+    s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     return s
 
 
@@ -119,7 +120,7 @@ def xnjy_show(request):
     json_obj, session_res = t_url_tools.parse_url(request)
     ui_type = 0
     try:
-        int(json_obj['ui_type'])
+        ui_type = int(json_obj['ui_type'])
     except Exception, e:
         pass
 
@@ -127,7 +128,19 @@ def xnjy_show(request):
         ui_type = "yellow"
     else:
         ui_type = "blue"
+    wx_name = ""
+    try:
+        wx_name = json_obj['wx_name']
+    except Exception, e:
+        pass
 
-    t = get_template('xnjy/index.html')
-    s = t.render({'ui_type': ui_type})
+    xnjy = Xnjy.objects.filter(people_id__wx_name=wx_name).first()
+    if xnjy is None:
+        print xnjy
+        xnjy = Xnjy()
+    t = get_template('xnjy/input.html')
+    s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
+
+    t = get_template('xnjy/show.html')
+    s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     return s
