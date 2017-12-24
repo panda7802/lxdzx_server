@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/{{ ui_type }}/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 2">
+        <button style="margin: 30% 0 0 50%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
+                onclick="goto_page(1)">
+            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我是留学生</b></div>
+        </button>
+
+        <button style="margin: 20% 0 0 50%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
+                onclick="goto_page(2)">
+            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我是准留学生</b></div>
+        </button>
+    </div>
+</div>
+<script>
+    var bl = 1.0;
+    var back = document.getElementById('div_back');
+    var back_height = $(back).height();
+    var back_width = $(back).width();
+    bl = back_height / 1920.0;
+
+    var img_back = document.getElementById('img_back');
+    img_back.style.height = back_height + "px";
+    img_back.style.width = back_height * 0.5625 + "px";
+
+    var div_cont = document.getElementById('div_cont');
+    div_cont.style.height = back_height + "px";
+    div_cont.style.width = back_height * 0.5625 + "px";
+    div_cont.style.marginLeft = (back_width - back_height * 0.5625 ) / 2 + "px";
+
+
+    function goto_page(index) {
+        safd
+    }
+
+    {#    layui.use('laydate', function () {#}
+    {#        var laydate = layui.laydate;#}
+    {##}
+    {#        //执行一个laydate实例#}
+    {#        laydate.render({#}
+    {#            elem: '#test1' //指定元素#}
+    {#        });#}
+    {#        laydate.render({#}
+    {#            elem: '#lx_time',#}
+    {#            format: 'yyyy 年 MM 月 dd 日',#}
+    {#            value: '2017 年 12 月 22 日' //必须遵循format参数设定的格式#}
+    {#        });#}
+    {#    });#}
+
+    {#    function test() {#}
+    {#        console.log(document.getElementById("lx_time").innerHTML)#}
+    {#    }#}
+
+</script>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+</script>
+</body>
+</html>

@@ -20,6 +20,9 @@ String.prototype.format = function (args) {
     return result;
 };
 
+function is_null(obj) {
+    return (null === obj) || (undefined === obj) || (obj.length() <= 0);
+}
 
 function get_query_string(name, def) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

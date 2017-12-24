@@ -146,6 +146,23 @@ class Video_Comment(models.Model):
         return s
 
 
+# 新年寄语
+class Xnjy(models.Model):
+    people_id = models.ForeignKey(People)
+    school = models.CharField('学校', max_length=1024, default="", blank=True)
+    jy = models.CharField('寄语', max_length=1024, default="", blank=True)
+    lx_time = models.CharField('寄语', max_length=64, default="", blank=True)
+    comment_time = models.DateTimeField('留学时间', default=timezone.now)  # 时间
+    bak_data = models.CharField('备用字段', max_length=1024, default="", blank=True)  # 备用字段
+
+    def __unicode__(self):
+        try:
+            s = self.people_id.wx_name + " : " + self.school
+        except Exception, e:
+            logging.error(str(e))
+            s = "get db err"
+        return s
+
 # TODO 人员级别
 
 

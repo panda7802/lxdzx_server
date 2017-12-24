@@ -14,7 +14,8 @@ import logic.play_ctrl
 import logic.video_ctrl
 from tutils import t_url_tools
 from tutils.t_global_data import TGlobalData
-from video_manager.logic import video_ctrl, people_manager, play_ctrl, show_res
+from video_manager.logic import video_ctrl, people_manager, play_ctrl, show_res, xnjy
+from video_manager.logic.xnjy import *
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -88,9 +89,11 @@ def get_file(request, file_name):
 #     return logic.video_ctrl.get_video_by_gjz(request)
 #
 #
-# # 登录
-# def login(request):
-#     return logic.people_manager.login(request)
+# 登录
+def login(request):
+    return logic.people_manager.login(request)
+
+
 #
 #
 # # 播放视频
@@ -177,6 +180,10 @@ def lxdzx(request, action):
             s = play_ctrl.do_my_fav(json_obj)
         elif action == "get_people_fav":
             s = play_ctrl.get_people_fav(json_obj)
+        elif action == "xnjy_save_xnjy":
+            s = xnjy.xnjy_save_xnjy(json_obj)
+        elif action == "xnjy_get_xnjy":
+            s = xnjy.xnjy_get_xnjy(json_obj)
         else:
             s = t_url_tools.get_response_str({}, success=False, msg="no " + action,
                                              err_code=t_url_tools.ERR_CODE_EXCEPTION)
@@ -195,6 +202,18 @@ def lxdzx_show(request, action):
     try:
         if action == "statistics_videos":
             s = show_res.statistics_videos(request)
+        elif action == "notice":
+            s = notice(request)
+        elif action == "about":
+            s = t_index(request)
+        elif action == "xnjy_index":
+            s = xnjy_index(request)
+        elif action == "xnjy_input":
+            s = xnjy_input(request)
+        elif action == "xnjy_show":
+            s = xnjy_show(request)
+        else:
+            s = "url 不存在:", action
     except Exception, e:
         traceback.print_exc()
         s = t_url_tools.get_response_str({}, success=False, msg=action + " 错误",

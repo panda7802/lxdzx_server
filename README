@@ -34,3 +34,13 @@ http://127.0.0.1:8000/get_video_comment?parm={"vid":2,"parentid":2}
 
 http://127.0.0.1:8000/?say_title=这是我们奋斗的时光&say_jy=奋斗直到永远&say_people=留学的真相
 >>>>>>> 19bafc5a2d46c532d2cac5a234f4a3f1c5912552
+
+127.0.0.1:8000/lxdzx_show/xnjy_index?parm={"ui_type":1,"wx_name":"aaa","wx_pic":""}
+
+127.0.0.1:8000/lxdzx_show/xnjy_input?parm={"ui_type":1,"wx_name":"aaa","wx_pic":""}
+
+http://127.0.0.1:8000/lxdzx/xnjy_save_xnjy?parm={"school":"哈佛","wx_name":"aaa","jy":"帝高阳之苗裔兮","lx_time":"20171111"}
+
+http://127.0.0.1:8000/lxdzx/xnjy_get_xnjy?parm={"wx_name":"aaa"}
+
+
