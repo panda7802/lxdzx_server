@@ -2,17 +2,16 @@
 from __future__ import unicode_literals
 
 # Create your views here.
+import hashlib
 import logging
 import sys
 import traceback
 
 from django.http import HttpResponse, StreamingHttpResponse
-from django.template.loader import get_template
 
 import logic.people_manager
 import logic.play_ctrl
 import logic.video_ctrl
-from tutils import t_url_tools
 from tutils.t_global_data import TGlobalData
 from video_manager.logic import video_ctrl, people_manager, play_ctrl, show_res, xnjy
 from video_manager.logic.xnjy import *
@@ -27,9 +26,41 @@ def t_index(request):
     s = t.render()
     return HttpResponse(s)
 
+
+def t_wx_web(request):
+    t = get_template('MP_verify_e3MyIfTydXwqxprn.txt')
+    s = t.render()
+    return HttpResponse(s)
+
+
 def wx_token(request):
-	s = request.GET.get('signature');
-	return HttpResponse(s)
+    try:
+        # s = "panguotian"
+        # return HttpResponse(s)
+        # data = web.input()
+        # if len(data) == 0:
+        #     return "hello, this is handle view"
+        print request.get_full_path()
+        print request.GET.get('signature')
+        signature = request.GET.get('signature')
+        timestamp = request.GET.get('timestamp')
+        nonce = request.GET.get('nonce')
+        echostr = request.GET.get('echostr')
+        token = "panguotian"  # 请按照公众平台官网\基本配置中信息填写
+        list = [token, timestamp, nonce]
+        list.sort()
+        sha1 = hashlib.sha1()
+        map(sha1.update, list)
+        hashcode = sha1.hexdigest()
+        print "handle/GET func: hashcode, signature: ", hashcode, signature
+        if hashcode == signature:
+            return HttpResponse(echostr)#echostr
+        else:
+            return ""
+    except Exception, Argument:
+        return Argument
+        # s = request.GET.get('signature')
+        # return HttpResponse(s)
 
 
 def t_test_amaze(request):

@@ -1,6 +1,5 @@
 function xnjy_init() {
 	var ui_type =  get_query_string("ui_type",1);
-	alert(ui_type);
 	if(0 != ui_type) {
 		document.body.style.background = "#ffc703";
 	} else {
@@ -15,7 +14,7 @@ function xnjy_init() {
 
     var img_back = document.getElementById('img_back');
     img_back.style.height = back_height + "px";
-	  img_back.style.width = back_height * 0.5625 + "px";
+    img_back.style.width = back_height * 0.5625 + "px";
     //img_back.style.width = "100%";
 
     var div_cont = document.getElementById('div_cont');
