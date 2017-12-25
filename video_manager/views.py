@@ -187,7 +187,13 @@ def lxdzx(request, action):
     logging.debug(request.get_host() + " -- " + request.get_full_path())
     s = ""
     try:
-        # 校验
+        if action == "MP_verify_e3MyIfTydXwqxprn.txt":
+            t = get_template('MP_verify_e3MyIfTydXwqxprn.txt')
+            logging.debug(t)
+            s = t.render()
+            areturn
+        
+		# 校验
         json_obj, session_res = t_url_tools.parse_url(request)
         if not session_res:
             s = t_url_tools.get_session_err_res()
@@ -219,6 +225,8 @@ def lxdzx(request, action):
             s = xnjy.xnjy_save_xnjy(json_obj)
         elif action == "xnjy_get_xnjy":
             s = xnjy.xnjy_get_xnjy(json_obj)
+        elif action == "xnjy_gzh":
+            s = xnjy.xnjy_gzh(request)
         else:
             s = t_url_tools.get_response_str({}, success=False, msg="no " + action,
                                              err_code=t_url_tools.ERR_CODE_EXCEPTION)
@@ -243,10 +251,15 @@ def lxdzx_show(request, action):
             s = t_index(request)
         elif action == "xnjy_index":
             s = xnjy_index(request)
+        elif action == "xnjy_gzh":
+            s = xnjy_gzh(request)
         elif action == "xnjy_input":
             s = xnjy_input(request)
         elif action == "xnjy_show":
             s = xnjy_show(request)
+        elif action == "MP_verify_e3MyIfTydXwqxprn.txt":
+            t = get_template('MP_verify_e3MyIfTydXwqxprn.txt')
+            s = t.render()
         else:
             s = "url 不存在:", action
     except Exception, e:

@@ -144,3 +144,18 @@ def xnjy_show(request):
     t = get_template('xnjy/show.html')
     s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     return s
+
+
+
+def xnjy_gzh(request):
+    json_obj, session_res = t_url_tools.parse_url(request)
+    ui_type = 0
+    try:
+        ui_type = int(json_obj['ui_type'])
+    except Exception, e:
+        pass
+
+    #s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
+    s = "aa"
+    return s
+
