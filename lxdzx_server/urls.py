@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^trans/(.*)', trans_url),
     url(r'^notice/', notice),
+    url(r'^wx_token/', wx_token),
     url(r'^login', login),
     # url(r'^lxdzx/', t_index),
     url(r'^lxdzx/(.*)', lxdzx),

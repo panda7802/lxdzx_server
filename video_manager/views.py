@@ -27,6 +27,10 @@ def t_index(request):
     s = t.render()
     return HttpResponse(s)
 
+def wx_token(request):
+	s = request.GET.get('signature');
+	return HttpResponse(s)
+
 
 def t_test_amaze(request):
     t = get_template('test_amaze.html')
