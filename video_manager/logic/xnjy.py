@@ -60,7 +60,7 @@ def xnjy_index(request):
     """
 
     json_obj, session_res = t_url_tools.parse_url(request)
-    ui_type = 0
+    ui_type = 1
     try:
         ui_type = int(json_obj['ui_type'])
     except Exception, e:
@@ -83,9 +83,9 @@ def xnjy_input(request):
     :return:
     """
 
-    json_obj, session_res = t_url_tools.parse_url(request)
-    ui_type = 0
+    ui_type = 1
     try:
+        json_obj, session_res = t_url_tools.parse_url(request)
         ui_type = int(json_obj['ui_type'])
     except Exception, e:
         pass
@@ -118,7 +118,7 @@ def xnjy_show(request):
     """
 
     json_obj, session_res = t_url_tools.parse_url(request)
-    ui_type = 0
+    ui_type = 1
     try:
         ui_type = int(json_obj['ui_type'])
     except Exception, e:
@@ -146,7 +146,6 @@ def xnjy_show(request):
     return s
 
 
-
 def xnjy_gzh(request):
     json_obj, session_res = t_url_tools.parse_url(request)
     ui_type = 0
@@ -155,7 +154,6 @@ def xnjy_gzh(request):
     except Exception, e:
         pass
 
-    #s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
+    # s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     s = "aa"
     return s
-

@@ -18,7 +18,7 @@
     <script src="/static/layui/layui.js"></script>
 </head>
 <!--<body style="background:#ffc703">-->
-<body>
+<body> 
 <style type="text/css">
     .lx_time {
         font-size: 2.25em;
@@ -67,13 +67,13 @@
                   style="width: 85%;height: 12%;margin: 70% 0 0 5%;border-color: #fffa;
                   padding:10px;border-radius:8px;text-align: center;">
             <legend id="lx_title"
-                    style="color: #333;margin:0 auto;">
-                我在 {{ xnjy.school }} 已经度过
+                    style="color: #333;margin:0 auto;font-size:11pt">
+                我在{{xnjy.school}}已经度过
             </legend>
             <div id="lx_time_cont" class="layui-field-box"
                  style="display:inline;text-align: center;margin:0 auto;padding:0px;background: #f00">
                 <div style="width: 100%;display:inline;text-align: center">
-                    <div style="margin:0 auto;font-size: 30pt;color: #fff" id="second">00
+                    <div style="margin:0 auto;font-size: 32pt;color: #fff" id="second">00
                         {#                        <div style="margin:0 auto;font-size: 10pt;color: #333">秒</div>#}
                     </div>
 
@@ -116,19 +116,27 @@
                 {{ xnjy.jy }}
             </div>
             <div id="lx_wx_name"
-                 style="text-align:right;color: white;font-family:'宋体';margin-top: 10px;margin-right: 20px;
+                 style="text-align:right;color: white;font-family:'宋体';margin-top: 10px;right:10px;
                  width: 100%;font-weight: bold">
                 --
             </div>
         </div>
-        {#        <button style="margin: 15% 50% 0 0%;width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"#}
-        {#                onclick="goto_page()">#}
-        {#            <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin-top: 5%"><b>我也试试</b></div>#}
-        {#        </button>#}
+                <button id="bt_goto_input" style="position:fixed; bottom:1%;left:30%;width: 40%;height:6%;background-size:100% 100%;background-repeat: repeat-y;
+						border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/{{ ui_type }}/bt_index.png')"
+                        onclick="goto_page()">
+                    <div style="font-size: 15pt;color: #fd0;width: 100%;height:100%;margin: 3% 0 5% 0"><b>我的秒表</b></div>
+                </button>
     </div>
 </div>
 <script>
     xnjy_init();
+	//设置底部按钮宽度
+    var back = document.getElementById('div_back');
+    var back_height = $(back).height();
+    var back_width = $(back).width();
+    document.getElementById('bt_goto_input').style.width = back_height * 0.24 + "px";
+    document.getElementById('bt_goto_input').style.left= (back_width - back_height * 0.24) / 2 + "px";
+
     {#    初始化时间内容背景#}
     var lx_time_cont = document.getElementById('lx_time_cont');
     var back = document.getElementById('div_back');
@@ -141,13 +149,14 @@
 
     var parm = get_query_string("parm", "");
     var data = JSON.parse(parm);
-    document.getElementById('lx_wx_name').innerHTML = "---" + data.wx_name + "&nbsp;&nbsp;";
+    document.getElementById('lx_wx_name').innerHTML = "---" + data.wx_name + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
     var send_data = Object();
     send_data.ui_type = data.ui_type;
 
     function goto_page() {
-        window.location.href = 'xnjy_index?parm=' + JSON.stringify(send_data);
+        //window.location.href = 'xnjy_index?parm=' + JSON.stringify(send_data);
+        window.location.href = 'xnjy_input?parm=' + JSON.stringify(send_data);
     }
 
     var date1 = new Date();
@@ -157,10 +166,10 @@
         var date3 = date2.getTime() - date1.getTime();   //时间差的毫秒数
         var school = data.school;
         if (date3 > 0) {
-            document.getElementById('lx_title').innerHTML = "我在 " + school + " 已经度过";
+            document.getElementById('lx_title').innerHTML = "我在" + school + "已经度过";
         } else {
             date3 = 0 - date3;
-            document.getElementById('lx_title').innerHTML = "我距离去 " + school + " 还有";
+            document.getElementById('lx_title').innerHTML = "我距离去" + school + "还有";
         }
         {#            //计算出相差年数#}
         {#            var years = parseInt(date3 / (24 * 3600 * 1000 * 30 * 365)); //Math.abs((date1.getFullYear() - date2.getFullYear()));#}
@@ -183,7 +192,7 @@
         {#        document.getElementById('hour').innerHTML = hours + "";#}
         {#        document.getElementById('min').innerHTML = minutes + "";#}
         {#        document.getElementById('second').innerHTML = seconds + "";#}
-        var seconds = Math.round(date3 / 1000);
+        var seconds = (date3/1000.0).toFixed(1);//Math.round(date3 / 1000);
         document.getElementById('second').innerHTML = seconds + '<span style="font-size:15pt;color:#333">&nbsp;秒</span>';
     }
 
@@ -200,7 +209,7 @@
         show_time(data);
         var funId = setInterval(function () {
             show_time(data);
-        }, 1000);
+        }, 100);
 
 
     }
@@ -226,7 +235,6 @@
     }
 
     init_data();
-
 
 </script>
 </body>

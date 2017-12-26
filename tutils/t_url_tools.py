@@ -6,11 +6,11 @@ import logging
 import urllib
 from json import JSONDecoder
 
+
 ERR_CODE_SESSION = 1
 ERR_CODE_DATA = 2
 ERR_CODE_PARM = 3
 ERR_CODE_EXCEPTION = 4
-
 
 def check_session(json_obj):
     # print "检测session"
@@ -43,7 +43,7 @@ def get_file_url(file_field):
 
 # 将数据字典的结果集返回成json
 def get_response_str(response_data, success=True, msg="", err_code=0):
-    if success:
+    if success :
         res = {'success': success, 'msg': msg}
     else:
         res = {'success': success, 'msg': msg, "errcode": err_code}

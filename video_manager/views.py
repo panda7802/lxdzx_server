@@ -8,10 +8,12 @@ import sys
 import traceback
 
 from django.http import HttpResponse, StreamingHttpResponse
+from django.template.loader import get_template
 
 import logic.people_manager
 import logic.play_ctrl
 import logic.video_ctrl
+from tutils import t_url_tools
 from tutils.t_global_data import TGlobalData
 from video_manager.logic import video_ctrl, people_manager, play_ctrl, show_res, xnjy
 from video_manager.logic.xnjy import *
@@ -191,9 +193,9 @@ def lxdzx(request, action):
             t = get_template('MP_verify_e3MyIfTydXwqxprn.txt')
             logging.debug(t)
             s = t.render()
-            areturn
-        
-		# 校验
+            return
+
+        # 校验
         json_obj, session_res = t_url_tools.parse_url(request)
         if not session_res:
             s = t_url_tools.get_session_err_res()

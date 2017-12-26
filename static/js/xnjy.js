@@ -1,3 +1,12 @@
+function fresh() {  
+
+	if(location.href.indexOf("&reload=true")<0) {
+	    location.href += "&reload=true";  
+	}  
+}  
+
+var flushed = false;
+
 function xnjy_init() {
 	var ui_type =  get_query_string("ui_type",1);
 	if(0 != ui_type) {
@@ -22,4 +31,15 @@ function xnjy_init() {
 	//div_cont.style.width = "100%";
     div_cont.style.width = back_height * 0.5625 + "px";
     div_cont.style.marginLeft = (back_width - back_height * 0.5625 ) / 2 + "px";
+
+
+	//setTimeout("fresh()",1000)
+	if(!flushed) {
+		setTimeout("xnjy_init()",1000);
+		flushed = true;
+	}
 }
+
+
+
+
