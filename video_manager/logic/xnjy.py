@@ -3,6 +3,7 @@
 # 视频管理
 
 from django.template.loader import get_template
+import logging
 
 from tutils import t_url_tools
 from video_manager.models import People, Xnjy
@@ -10,14 +11,14 @@ from video_manager.models import People, Xnjy
 
 def xnjy_save_xnjy(json_obj):
     # 增加微信名称
-    wx_name = json_obj['wx_name']
-    people = People.objects.filter(wx_name=wx_name)
+    nick_name = json_obj['nick_name']
+    people = People.objects.filter(name=nick_name)
     people_count = people.__len__()
     if people_count <= 0:
         people = People()
-        people.wx_name = wx_name
+        people.name = nick_name
         people.save()
-        people = People.objects.filter(wx_name=wx_name).first()
+        people = People.objects.filter(name=nick_name).first()
     else:
         people = people.first()
 
@@ -36,8 +37,8 @@ def xnjy_save_xnjy(json_obj):
 
 def xnjy_get_xnjy(json_obj):
     # 增加微信名称
-    wx_name = json_obj['wx_name']
-    people = People.objects.filter(wx_name=wx_name).first()
+    nick_name = json_obj['nick_name']
+    people = People.objects.filter(name=nick_name).first()
     res_item = {'school': ""}
     res_item['jy'] = ""
     res_item['lx_time'] = ""
@@ -58,10 +59,9 @@ def xnjy_index(request):
     :param request:
     :return:
     """
-
-    json_obj, session_res = t_url_tools.parse_url(request)
     ui_type = 1
     try:
+        json_obj, session_res = t_url_tools.parse_url(request)
         ui_type = int(json_obj['ui_type'])
     except Exception, e:
         pass
@@ -101,9 +101,8 @@ def xnjy_input(request):
     except Exception, e:
         pass
 
-    xnjy = Xnjy.objects.filter(people_id__wx_name=wx_name).first()
+    xnjy = Xnjy.objects.filter(people_id__name=wx_name).first()
     if xnjy is None:
-        print xnjy
         xnjy = Xnjy()
     t = get_template('xnjy/input.html')
     s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
@@ -128,32 +127,42 @@ def xnjy_show(request):
         ui_type = "yellow"
     else:
         ui_type = "blue"
-    wx_name = ""
+    nick_name = ""
     try:
-        wx_name = json_obj['wx_name']
+        nick_name = json_obj['nick_name']
     except Exception, e:
         pass
 
-    xnjy = Xnjy.objects.filter(people_id__wx_name=wx_name).first()
+    xnjy = Xnjy.objects.filter(people_id__name=nick_name).first()
     if xnjy is None:
         print xnjy
         xnjy = Xnjy()
-    t = get_template('xnjy/input.html')
-    s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
+    # t = get_template('xnjy/input.html')
+    # s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
 
     t = get_template('xnjy/show.html')
     s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     return s
 
+import urllib2
+
 
 def xnjy_gzh(request):
-    json_obj, session_res = t_url_tools.parse_url(request)
+
     ui_type = 0
     try:
+        json_obj, session_res = t_url_tools.parse_url(request)
         ui_type = int(json_obj['ui_type'])
     except Exception, e:
         pass
 
+	url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa3e9bee4d1d172d&redirect_uri=https%3a%2f%2fwww.pandafly.cn%2flxdzx_show%2fxnjy_gzh&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+	res = urllib2.urlopen(url).read()
+	logging.debug("xnjy_gzh : " + res)
+
     # s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
-    s = "aa"
+ #   s = "panguotian"
+    s = res
     return s
+
+

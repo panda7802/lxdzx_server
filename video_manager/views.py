@@ -243,7 +243,7 @@ def lxdzx(request, action):
 
 
 def lxdzx_show(request, action):
-    print request.get_full_path()
+    logging.debug(request.get_full_path())
     try:
         if action == "statistics_videos":
             s = show_res.statistics_videos(request)
@@ -266,11 +266,10 @@ def lxdzx_show(request, action):
             s = "url 不存在:", action
     except Exception, e:
         traceback.print_exc()
+        logging.exception(e)
         s = t_url_tools.get_response_str({}, success=False, msg=action + " 错误",
                                          err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
-        print s
-        logging.debug(s)
         return HttpResponse(s)
 
 

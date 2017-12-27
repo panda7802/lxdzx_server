@@ -1,19 +1,19 @@
-function fresh() {  
+function fresh() {
 
-	if(location.href.indexOf("&reload=true")<0) {
-	    location.href += "&reload=true";  
-	}  
-}  
+    if (location.href.indexOf("&reload=true") < 0) {
+        location.href += "&reload=true";
+    }
+}
 
 var flushed = false;
 
 function xnjy_init() {
-	var ui_type =  get_query_string("ui_type",1);
-	if(0 != ui_type) {
-		document.body.style.background = "#ffc703";
-	} else {
-		document.body.style.background = "#0303ff";
-	}
+    // var ui_type = get_query_string("ui_type", 1);
+    // if (0 !== ui_type) {
+    //     document.body.style.background = "#ffc703";
+    // } else {
+    //     document.body.style.background = "#0303ff";
+    // }
 
     var bl = 1.0;
     var back = document.getElementById('div_back');
@@ -28,16 +28,16 @@ function xnjy_init() {
 
     var div_cont = document.getElementById('div_cont');
     div_cont.style.height = back_height + "px";
-	//div_cont.style.width = "100%";
+    //div_cont.style.width = "100%";
     div_cont.style.width = back_height * 0.5625 + "px";
     div_cont.style.marginLeft = (back_width - back_height * 0.5625 ) / 2 + "px";
 
 
-	//setTimeout("fresh()",1000)
-	if(!flushed) {
-		setTimeout("xnjy_init()",1000);
-		flushed = true;
-	}
+    //setTimeout("fresh()",1000)
+    if (!flushed) {
+        setTimeout("xnjy_init()", 1000);
+        flushed = true;
+    }
 }
 
 

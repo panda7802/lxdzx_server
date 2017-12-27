@@ -113878,3 +113878,3505 @@ ee
 </script>
 </body>
 </html>
+2017-12-27 19:41:07,635 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:41:07,671 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+			<div style="font-size:18pt;margin:0;float:left"><b>我是</b></div>
+            <input id="input_wx_name" class="layui-input-block" type="text" name="title" placeholder="请输入您的昵称"
+                   value="" autocomplete="off"
+                   style="margin:0 0 0 2%;width: 40%;padding-left: 10px;border-radius:8px;border-width: 0px">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto" onclick="get_value()">
+        </div>
+		<br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+			<input class="layui-input-block" style="margin-left:9%;width: 48%;padding-left:10px;border-radius:8px;float:left;border-width: 0px"
+    	           readonly="true" id="input_lx_time"/>
+			<div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+			    <select class="layui-input-block">
+			        <option value="0">我已在这</option>
+			        <option value="1">我将要去</option>
+			    </select>
+			</div>
+		</div><br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+		<div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)" ></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+	
+	layui.use('layer', function(){
+	});     
+
+	layui.use('form', function () {
+	});
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+	get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+			layui.layer.open({
+				title: '输入有误',
+				content: '国家学校名称不得超过12字'
+			});
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+			layui.layer.open({
+				title: '输入有误',
+				content: '新年寄语不得超过40字'
+			});
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:53:46,964 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:53:46,996 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <input class="layui-input-block"
+                   style="margin-left:9%;width: 48%;padding-left:10px;border-radius:8px;float:left;border-width: 0px"
+                   readonly="true" id="input_lx_time"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">我已在这</option>
+                    <option value="1">我将要去</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:53:49,654 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:53:49,671 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <input class="layui-input-block"
+                   style="margin-left:9%;width: 48%;padding-left:10px;border-radius:8px;float:left;border-width: 0px"
+                   readonly="true" id="input_lx_time"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">我已在这</option>
+                    <option value="1">我将要去</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:53:51,599 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:53:51,608 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <input class="layui-input-block"
+                   style="margin-left:9%;width: 48%;padding-left:10px;border-radius:8px;float:left;border-width: 0px"
+                   readonly="true" id="input_lx_time"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">我已在这</option>
+                    <option value="1">我将要去</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:53:53,239 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:53:53,244 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <input class="layui-input-block"
+                   style="margin-left:9%;width: 48%;padding-left:10px;border-radius:8px;float:left;border-width: 0px"
+                   readonly="true" id="input_lx_time"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">我已在这</option>
+                    <option value="1">我将要去</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:53:54,971 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:53:54,980 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <input class="layui-input-block"
+                   style="margin-left:9%;width: 48%;padding-left:10px;border-radius:8px;float:left;border-width: 0px"
+                   readonly="true" id="input_lx_time"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">我已在这</option>
+                    <option value="1">我将要去</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:53:56,457 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:53:56,466 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <input class="layui-input-block"
+                   style="margin-left:9%;width: 48%;padding-left:10px;border-radius:8px;float:left;border-width: 0px"
+                   readonly="true" id="input_lx_time"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">我已在这</option>
+                    <option value="1">我将要去</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:56:01,367 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:56:01,382 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time"/>
+            <div class="layui-form input_cont" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:56:36,075 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:56:36,091 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline"/>
+            <div class="layui-form input_cont" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:56:58,236 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:56:58,269 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block  input_cont">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:57:59,101 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:57:59,134 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的留学</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block" style="padding-left: 10px;border-radius: 8px;border-width: 0px">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = JSON.parse(parm);
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 19:59:23,888 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 19:59:23,904 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的秒表</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div style="display:block;margin: 45% 3% 0 9%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div style="width:100%;margin: 1% 0 0 0%;display:block">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block" style="padding-left: 10px;border-radius: 8px;border-width: 0px">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = new Object();
+		if (parm.length > 3) {
+			send_data = JSON.parse(parm);
+		}
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 20:00:41,520 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:00:41,536 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的秒表</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .input_line {
+        display: block;
+        margin: 45% 3% 0 9%;
+    }
+
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div class="input_line">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div class="input_line" style="width:100%;margin: 1% 0 0 0%;display:block">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block" style="padding-left: 10px;border-radius: 8px;border-width: 0px">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = new Object();
+        if (parm.length > 3) {
+            send_data = JSON.parse(parm);
+        }
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 20:00:57,595 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:00:57,611 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的秒表</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .input_line {
+        display: block;
+        width: 100%;
+        margin: 45% 3% 0 9%;
+    }
+
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div class="input_line">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div class="input_line">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block" style="padding-left: 10px;border-radius: 8px;border-width: 0px">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = new Object();
+        if (parm.length > 3) {
+            send_data = JSON.parse(parm);
+        }
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 20:01:17,971 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:01:17,987 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的秒表</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .input_line {
+        display: block;
+        width: 100%;
+        margin: 4% 3% 0 9%;
+    }
+
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div class="input_line" style="margin-top: 45%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div class="input_line">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block" style="padding-left: 10px;border-radius: 8px;border-width: 0px">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = new Object();
+        if (parm.length > 3) {
+            send_data = JSON.parse(parm);
+        }
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 20:01:28,637 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:01:28,667 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的秒表</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .input_line {
+        display: block;
+        width: 100%;
+        margin: 4% 3% 0 9%;
+    }
+
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0px
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div class="input_line" style="margin-top: 45%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div class="input_line">
+            <div class="flag"><b>时间</b></div>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <input class="layui-input-block input_cont"
+                       readonly="true" id="input_lx_time" style="display:inline"/>
+                <select class="layui-input-block" style="padding-left: 10px;border-radius: 8px;border-width: 0px">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = new Object();
+        if (parm.length > 3) {
+            send_data = JSON.parse(parm);
+        }
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 20:02:11,371 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:02:11,388 [views:lxdzx_show] [DEBUG]- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>我的秒表</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/xnjy.js"></script>
+    <script type="text/javascript" src="/static/js/t_tools.js"></script>
+    <link rel="stylesheet" href="http://res.layui.com/layui/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" href="http://res.layui.com/css/global.css?t=1512984638033" media="all">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .input_line {
+        display: block;
+        width: 100%;
+        margin: 4% 3% 0 9%;
+    }
+
+    .flag {
+        font-size: 18pt;
+        margin: 0;
+        float: left
+    }
+
+    .input_cont {
+        margin: 0 0 0 2%;
+        width: 40%;
+        padding-left: 10px;
+        border-radius: 8px;
+        border-width: 0;
+    }
+</style>
+<div>
+    <div id="div_back" style="position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+        <img id="img_back" src="/static/img/xnjy/yellow/input.jpg">
+    </div>
+    <div id="div_cont" style="position:absolute;width: 100%;height: 100%;z-index: 2">
+        <div class="input_line" style="margin-top: 45%">
+            <div class="flag"><b>人物</b></div>
+            <input id="input_wx_name" class="layui-input-block input_cont" type="text" name="title"
+                   placeholder="请输入您的昵称"
+                   value="" autocomplete="off">
+            <img src="/static/img/search.png" height="5%" width="15%" style="display:none;width:auto"
+                 onclick="get_value()">
+        </div>
+        <br/>
+        <div class="input_line">
+            <div class="flag"><b>时间</b></div>
+            <input class="layui-input-block input_cont"
+                   readonly="true" id="input_lx_time" style="display:inline;float: left"/>
+            <div class="layui-form" style="margin-left:2%;width: 30%;float:left;display:inline">
+                <select class="layui-input-block" style="padding-left: 10px;border-radius: 8px;border-width: 0px">
+                    <option value="0">将去</option>
+                    <option value="1">抵达</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+
+        <textarea class="layui-input-block"
+                  style="margin: 5% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 12%;border-width: 0px"
+                  id="input_school" placeholder="请输入您的国家与学校(限12字)"></textarea><br/>
+
+        <div style="margin: 3% 0 0 9%;font-size:18pt;"><b style="height:100%">我想说</b></div>
+
+        <textarea class="layui-input-block"
+                  style="margin: 3% 0 0 9%;width: 80%;padding:10px 0 0 10px;border-radius:8px;height: 15%;border-width: 0px"
+                  id="input_jy" placeholder="对自己说的话和未来的展望(限40字)"></textarea>
+        <div id="div_cont" style="width: 100%;margin: 4% 0 0 10%;text-align: left">
+            <button style="width: 40%;height:7.5%;background-size:100% 100%;border-style:none;background-color: transparent ; background-image: url('/static/img/xnjy/yellow/bt_sure.png')"
+                    onclick="goto_page()">
+                <div style="font-size: 15pt;color: #fff;width: 100%;height:100%;padding: 10px 0 10px 0"><b>确定</b></div>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    xnjy_init();
+
+    layui.use('layer', function () {
+    });
+
+    layui.use('form', function () {
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var lx_time = 20190101+"";
+        lx_time = lx_time.toString();
+        if (lx_time.length < 8) {
+            lx_time = "20180101";
+        }
+
+        laydate.render({
+            elem: '#input_lx_time',
+            format: 'yyyy 年 MM 月 dd 日',
+            value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+        });
+    });
+
+
+    function get_value() {
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        if (wx_name.length <= 0) {
+            return;
+        }
+        $.ajax({
+            url: "../lxdzx/xnjy_get_xnjy?parm={\"wx_name\":\"" + wx_name + "\"}",
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.success) {
+                    var res = data.data.res;
+                    console.log(res);
+                    document.getElementById("input_school").value = res.school;
+                    document.getElementById("input_jy").value = res.jy;
+                    var laydate = layui.laydate;
+                    var lx_time = res.lx_time;
+                    layui.laydate.render({
+                        elem: '#input_lx_time',
+                        format: 'yyyy 年 MM 月 dd 日',
+                        value: lx_time.substring(0, 4) + ' 年 ' + lx_time.substring(4, 6) + ' 月 ' + lx_time.substring(6, 8) + ' 日' //必须遵循format参数设定的格式
+                    });
+                }
+            }
+        });
+    }
+
+    get_value();
+
+    function goto_page(index) {
+        var parm = get_query_string("parm", "");
+        var wx_name = document.getElementById("input_wx_name").value;
+        wx_name = wx_name.toString();
+        var lx_time = document.getElementById("input_lx_time").value;
+        lx_time = lx_time.toString();
+        var s = "";
+        for (var i = 0; i < lx_time.length; i++) {
+            var ts = lx_time[i];
+            if ((ts > '9') || (ts < '0')) {
+                continue;
+            } else {
+                s += ts;
+            }
+        }
+        lx_time = s;
+        var school = document.getElementById("input_school").value;
+        school = school.toString();
+        if (school.length > 12) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '国家学校名称不得超过12字'
+            });
+            return;
+        }
+        var jy = document.getElementById("input_jy").value;
+        jy = jy.toString();
+        if (jy.length >= 40) {
+            layui.layer.open({
+                title: '输入有误',
+                content: '新年寄语不得超过40字'
+            });
+            return;
+        }
+        //TODO 输入校验
+        var send_data = new Object();
+        if (parm.length > 3) {
+            send_data = JSON.parse(parm);
+        }
+        send_data.wx_name = wx_name;
+        send_data.lx_time = lx_time;
+        send_data.school = school;
+        send_data.jy = jy;
+        parm = JSON.stringify(send_data);
+        console.log(parm);
+        $.ajax({
+            url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,
+            success: function (data) {
+                console.log(data);
+                window.location.href = 'xnjy_show?parm=' + parm;
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
+2017-12-27 20:06:12,717 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:07:18,691 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:07:25,005 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:08:04,134 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:08:54,338 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:10:29,155 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:11:51,269 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:12:05,831 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:12:14,987 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:12:19,256 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:13:15,538 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:13:57,684 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:14:00,888 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:14:48,464 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:15:21,174 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:15:36,831 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:15:51,236 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:17:08,687 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:17:11,812 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:17:18,227 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:17:21,977 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:17:26,092 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:17:47,161 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:18:02,697 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:18:59,835 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:19:11,562 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:19:19,144 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:19:43,051 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:19:51,160 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:20:53,951 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:21:32,220 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:21:40,322 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:22:11,177 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:22:18,937 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:22:40,911 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:23:23,746 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:23:43,657 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:24:07,042 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:24:15,796 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:29:15,201 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:29:48,142 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:30:19,503 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:30:38,575 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:31:41,522 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:31:45,155 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:32:09,088 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:33:14,654 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:33:19,002 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:33:37,200 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:34:41,285 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:34:50,450 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:35:10,115 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:35:32,105 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:36:06,953 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:37:14,263 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:37:19,296 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:37:32,894 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:37:38,690 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:37:53,892 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:38:37,053 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:40:22,928 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:41:21,890 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:41:23,173 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:41:23,654 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:41:30,088 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:42:59,934 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:45:02,348 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:45:36,878 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:46:02,483 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:49:00,441 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:49:32,858 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:49:55,259 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:50:21,809 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:51:38,154 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:52:00,969 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:52:12,335 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:52:24,706 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:52:51,687 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:53:37,104 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:54:13,851 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:54:22,216 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:54:28,881 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:54:40,046 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:54:49,549 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:55:27,230 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:56:28,421 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:56:39,625 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:58:21,319 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:58:35,375 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:58:46,292 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:58:54,892 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:59:07,825 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:59:39,059 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 20:59:56,473 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:00:04,890 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:00:09,874 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:01:20,888 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:01:30,740 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:02:29,236 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:02:43,671 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:02:52,352 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:03:30,187 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:03:42,137 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:04:06,650 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:04:23,967 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:04:30,634 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:04:43,233 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:04:51,815 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:05:22,915 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:05:50,417 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:06:05,063 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:06:11,596 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:06:48,654 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:08:06,015 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:08:48,078 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:10:08,209 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:11:31,108 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:11:40,025 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:12:00,525 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:12:15,286 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:12:19,183 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:13:03,904 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22%22,%22lx_time%22:%2220190101%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:13:03,904 [views:lxdzx] [DEBUG]- {"msg": "xnjy_save_xnjy 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-27 21:13:03,937 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22%22,%22lx_time%22:%2220190101%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:14:14,990 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:15:23,216 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:16:16,829 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:16:23,365 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:17:18,464 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:17:54,296 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:17:58,795 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:18:07,947 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:18:16,697 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:19:40,759 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:20:02,374 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:20:20,542 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:20:59,091 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:21:42,575 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:21:44,924 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22%22,%22lx_time%22:%2220190101%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:21:44,924 [views:lxdzx] [DEBUG]- {"msg": "xnjy_save_xnjy 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-27 21:21:44,954 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22%22,%22lx_time%22:%2220190101%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:21:45,822 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22%22,%22lx_time%22:%2220190101%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:22:21,604 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22%22,%22lx_time%22:%2220190101%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:23:26,871 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22%22,%22lx_time%22:%2220190101%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:25:03,566 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:25:25,950 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:25:53,683 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:25:59,318 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:25:59,815 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:26:09,851 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:26:56,232 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:27:06,831 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:27:17,448 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:27:25,065 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22aaa%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:27:25,148 [views:lxdzx] [DEBUG]- {"msg": "xnjy_save_xnjy 异常", "data": {}, "errcode": 4, "success": false}
+2017-12-27 21:27:25,164 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aaa%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:28:35,211 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22aaa%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:28:35,278 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:28:35,313 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aaa%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:29:11,046 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:29:13,331 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:31:54,584 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:32:03,095 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:32:03,157 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:32:03,188 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:33:01,357 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:33:01,552 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22%7D
+2017-12-27 21:33:01,559 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "ee", "jy": "eeee", "lx_time": "20190101"}}, "success": true}
+2017-12-27 21:33:15,846 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:33:15,941 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22%7D
+2017-12-27 21:33:15,947 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "ee", "jy": "eeee", "lx_time": "20190101"}}, "success": true}
+2017-12-27 21:33:43,247 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22eeee%22%7D
+2017-12-27 21:33:43,351 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22%7D
+2017-12-27 21:33:43,355 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "ee", "jy": "eeee", "lx_time": "20190101"}}, "success": true}
+2017-12-27 21:34:07,434 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:34:07,563 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22%7D
+2017-12-27 21:34:07,566 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "ee", "jy": "eeee", "lx_time": "20190101"}}, "success": true}
+2017-12-27 21:34:23,009 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:34:23,118 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda1%22%7D
+2017-12-27 21:34:23,121 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "", "jy": "", "lx_time": ""}}, "success": true}
+2017-12-27 21:34:34,676 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22flyPanda1%22,%22lx_time%22:%2220171227%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:34:34,756 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:34:34,783 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda1%22,%22lx_time%22:%2220171227%22,%22school%22:%22%22,%22jy%22:%22%22%7D
+2017-12-27 21:34:34,894 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda1%22%7D
+2017-12-27 21:34:34,901 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "", "jy": "", "lx_time": "20171227"}}, "success": true}
+2017-12-27 21:34:46,532 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22flyPanda1%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22efff%22%7D
+2017-12-27 21:34:46,568 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:34:46,622 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda1%22,%22lx_time%22:%2220190101%22,%22school%22:%22ee%22,%22jy%22:%22efff%22%7D
+2017-12-27 21:34:46,760 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda1%22%7D
+2017-12-27 21:34:46,763 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "ee", "jy": "efff", "lx_time": "20190101"}}, "success": true}
+2017-12-27 21:35:51,315 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22flyPanda1%22,%22lx_time%22:%2220171227%22,%22school%22:%22ee%22,%22jy%22:%22efff%22%7D
+2017-12-27 21:35:51,338 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:35:51,390 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda1%22,%22lx_time%22:%2220171227%22,%22school%22:%22ee%22,%22jy%22:%22efff%22%7D
+2017-12-27 21:35:51,536 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda1%22%7D
+2017-12-27 21:35:51,539 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "ee", "jy": "efff", "lx_time": "20171227"}}, "success": true}
+2017-12-27 21:36:27,147 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220190101%22,%22school%22:%22bbbbb%22,%22jy%22:%22eeeeeeeeeeeeee%22%7D
+2017-12-27 21:36:27,168 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:36:27,220 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220190101%22,%22school%22:%22bbbbb%22,%22jy%22:%22eeeeeeeeeeeeee%22%7D
+2017-12-27 21:36:27,332 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22%7D
+2017-12-27 21:36:27,334 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "bbbbb", "jy": "eeeeeeeeeeeeee", "lx_time": "20190101"}}, "success": true}
+2017-12-27 21:37:37,989 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220171227%22,%22school%22:%22bbbbb%22,%22jy%22:%22eeeeeeeeeeeeee%22%7D
+2017-12-27 21:37:38,012 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:37:38,062 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22flyPanda%22,%22lx_time%22:%2220171227%22,%22school%22:%22bbbbb%22,%22jy%22:%22eeeeeeeeeeeeee%22%7D
+2017-12-27 21:37:38,170 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22%7D
+2017-12-27 21:37:38,173 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "bbbbb", "jy": "eeeeeeeeeeeeee", "lx_time": "20171227"}}, "success": true}
+2017-12-27 21:38:26,619 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:38:26,746 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22flyPanda%22%7D
+2017-12-27 21:38:26,750 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "bbbbb", "jy": "eeeeeeeeeeeeee", "lx_time": "20171227"}}, "success": true}
+2017-12-27 21:39:37,627 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:39:59,292 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:40:01,017 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:40:03,319 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:41:23,845 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:43:30,891 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input
+2017-12-27 21:45:27,499 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22aa%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee%22,%22jy%22:%22333%22%7D
+2017-12-27 21:45:27,558 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:45:27,592 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee%22,%22jy%22:%22333%22%7D
+2017-12-27 21:45:27,857 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa%22%7D
+2017-12-27 21:45:27,861 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee", "jy": "333", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:45:45,759 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%223331%22%7D
+2017-12-27 21:45:45,834 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:45:45,861 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%223331%22%7D
+2017-12-27 21:45:46,085 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:45:46,088 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "3331", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:45:53,956 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%223331%22%7D
+2017-12-27 21:45:53,990 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:45:54,036 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%223331%22%7D
+2017-12-27 21:45:54,236 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:45:54,240 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "3331", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:46:05,815 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%223331%22%7D
+2017-12-27 21:46:06,033 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:46:06,038 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "3331", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:46:45,976 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%223331%22%7D
+2017-12-27 21:46:46,154 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:46:46,157 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "3331", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:47:17,716 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_save_xnjy?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:47:17,736 [views:lxdzx] [DEBUG]- {"msg": "", "data": {}, "success": true}
+2017-12-27 21:47:17,805 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:47:18,078 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:47:18,082 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:47:45,221 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:47:45,321 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:47:45,323 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:48:12,013 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:48:12,092 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:48:12,098 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:48:14,006 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:48:14,266 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:48:14,272 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:51:30,315 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:51:30,522 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:51:30,526 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:53:10,203 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:53:21,316 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%22201801011%22,%22school%22:%22eee1%22,%22jy%22:%221111%22%7D
+2017-12-27 21:53:28,404 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:53:49,233 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:54:20,812 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:54:46,701 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:54:46,706 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:55:31,483 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:55:31,903 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:55:31,908 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:55:59,127 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:56:11,500 [views:lxdzx] [DEBUG]- 127.0.0.1:8000 -- /lxdzx/xnjy_get_xnjy?parm=%7B%22nick_name%22:%22aa1%22%7D
+2017-12-27 21:56:11,503 [views:lxdzx] [DEBUG]- {"msg": "", "data": {"res": {"school": "eee1", "jy": "1111", "lx_time": "20180101"}}, "success": true}
+2017-12-27 21:56:23,566 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:57:48,441 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:58:09,073 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:58:15,188 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input?parm=%7B%7D
+2017-12-27 21:58:34,535 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_input?parm=%7B%7D
+2017-12-27 21:58:37,020 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22aa1%22,%22lx_time%22:%2220180101%22,%22school%22:%22eee21%22,%22jy%22:%2211311%22%7D
+2017-12-27 21:58:37,999 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:03:55,627 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:04:02,900 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:04:35,022 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:04:37,529 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:04:37,605 [views:lxdzx_show] [DEBUG]- /lxdzx_show/undefined
+2017-12-27 22:04:39,678 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:04:41,066 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:04:41,161 [views:lxdzx_show] [DEBUG]- /lxdzx_show/undefined
+2017-12-27 22:04:46,049 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index?parm=%7B%7D
+2017-12-27 22:04:46,140 [views:lxdzx_show] [DEBUG]- /lxdzx_show/undefined
+2017-12-27 22:04:51,493 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_index
+2017-12-27 22:04:51,513 [views:lxdzx_show] [ERROR]- 'NoneType' object has no attribute 'split'
+Traceback (most recent call last):
+  File "E:\pythonCode\lxdzx_server\video_manager\views.py", line 255, in lxdzx_show
+    s = xnjy_index(request)
+  File "E:\pythonCode\lxdzx_server\video_manager\logic\xnjy.py", line 63, in xnjy_index
+    json_obj, session_res = t_url_tools.parse_url(request)
+  File "E:\pythonCode\lxdzx_server\tutils\t_url_tools.py", line 25, in parse_url
+    json_obj = JSONDecoder().decode(urllib.unquote(parm))
+  File "E:\Python27\lib\urllib.py", line 1234, in unquote
+    bits = s.split('%')
+AttributeError: 'NoneType' object has no attribute 'split'
