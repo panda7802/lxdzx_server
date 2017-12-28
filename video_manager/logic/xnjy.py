@@ -144,11 +144,11 @@ def xnjy_show(request):
     s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     return s
 
+
 import urllib2
 
 
 def xnjy_gzh(request):
-
     ui_type = 0
     try:
         json_obj, session_res = t_url_tools.parse_url(request)
@@ -156,13 +156,11 @@ def xnjy_gzh(request):
     except Exception, e:
         pass
 
-	url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa3e9bee4d1d172d&redirect_uri=https%3a%2f%2fwww.pandafly.cn%2flxdzx_show%2fxnjy_gzh&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-	res = urllib2.urlopen(url).read()
-	logging.debug("xnjy_gzh : " + res)
+    url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa3e9bee4d1d172d&redirect_uri=https%3a%2f%2fwww.pandafly.cn%2flxdzx_show%2fxnjy_gzh&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    res = urllib2.urlopen(url).read()
+    logging.debug("xnjy_gzh : " + res)
 
     # s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
- #   s = "panguotian"
+    #   s = "panguotian"
     s = res
     return s
-
-

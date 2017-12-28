@@ -12,30 +12,30 @@ var SNOW_BASE_COLOR = "#ddd";
 
 //初始化雪花id
 function initIds() {
-    for(var i = 0; i < SNOW_MAX_COUNT ; i++) {
+    for (var i = 0; i < SNOW_MAX_COUNT; i++) {
         snowIds[i] = NO_USE;
     }
 }
 
 function getId() {
     var res = -1;
-    for(var i = 0; i < SNOW_MAX_COUNT ;i++) {
+    for (var i = 0; i < SNOW_MAX_COUNT; i++) {
         if (NO_USE == snowIds[i]) {
-           res = i;
-           break;
+            res = i;
+            break;
         }
     }
     return res;
 }
 
 //开始下落
-function snowDrop(eleSnow, currPos,id) {
+function snowDrop(eleSnow, currPos, id) {
     if (null === eleSnow) {
         console.log("eleSnow is null");
         return;
     }
-    var snowSpeed =  4 + parseInt(3 * Math.random());
-    var funId = setInterval(function() {
+    var snowSpeed = 4 + parseInt(3 * Math.random());
+    var funId = setInterval(function () {
         currPos += snowSpeed;
         eleSnow.style.top = currPos + "px";
         if (currPos > snowbgHeight) {
@@ -48,7 +48,7 @@ function snowDrop(eleSnow, currPos,id) {
     }, 50);
 }
 
-function getRandomColor (rmin, rmax, gmin, gmax, bmin, bmax, a) {
+function getRandomColor(rmin, rmax, gmin, gmax, bmin, bmax, a) {
     var r = Math.round(Garden.random(rmin, rmax));
     var g = Math.round(Garden.random(gmin, gmax));
     var b = Math.round(Garden.random(bmin, bmax));
@@ -56,7 +56,7 @@ function getRandomColor (rmin, rmax, gmin, gmax, bmin, bmax, a) {
     if ((Math.abs(r - g) <= limit) && (Math.abs(g - b) <= limit) && (Math.abs(b - r) <= limit)) {
         return getRandomColor(rmin, rmax, gmin, gmax, bmin, bmax, a);
     } else if ((r < 128) && (g < 128) && (b < 128)) {
-         return getRandomColor(rmin, rmax, gmin, gmax, bmin, bmax, a);
+        return getRandomColor(rmin, rmax, gmin, gmax, bmin, bmax, a);
     } else {
         return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
     }
@@ -65,13 +65,13 @@ function getRandomColor (rmin, rmax, gmin, gmax, bmin, bmax, a) {
 
 //点击雪
 function clickSnow(id) {
-    eleSnow = document.getElementById("snow"+id);
+    eleSnow = document.getElementById("snow" + id);
     if (NO_USE == eleSnow.getAttribute("snowing")) {
         return;
     }
-    eleSnow.setAttribute("snowing",NO_USE);
+    eleSnow.setAttribute("snowing", NO_USE);
     // eleSnow.style.color = "#fff";
-    s_rgba = getRandomColor(0,  255, //
+    s_rgba = getRandomColor(0, 255, //
         0, 255, //
         0, 255, //
         1);
@@ -79,22 +79,27 @@ function clickSnow(id) {
     eleSnow.style.color = s_rgba;// s_rgba;
 
     var textSize = eleSnow.style.getPropertyValue("font-size");//字体大小(包含px)
-    textSize = textSize.substring(0,textSize.length - 2);
+    textSize = textSize.substring(0, textSize.length - 2);
     var xPos = eleSnow.getAttribute("posXCenter");//中心坐标
-    var poemId  = parseInt(Math.random() * poems.length);
+    var poemId = parseInt(Math.random() * poems.length);
     var showText = poems[poemId];
     // alert(showText);
-    textSize = 24;
+    // textSize = 24 + "pt";
+    if (!isMobile()) {
+        textSize = 24;
+    } else {
+        textSize = 20;
+    }
     eleSnow.style.fontSize = textSize + "px";
     // console.log("textSize : " + textSize + " , " + showText.length);
-    eleSnow.style.marginLeft = parseInt(xPos  - textSize * showText.length / 2) + "px";
+    eleSnow.style.marginLeft = parseInt(xPos - textSize * showText.length / 2) + "px";
     eleSnow.innerHTML = showText;
-    
+
 }
 
 //触摸雪
 function touchSnow(id) {
-    eleSnow = document.getElementById("snow"+id);
+    eleSnow = document.getElementById("snow" + id);
     if (NO_USE == eleSnow.getAttribute("snowing")) {
         return;
     }
@@ -106,7 +111,7 @@ function leaveSnow(id) {
     if (NO_USE == eleSnow.getAttribute("snowing")) {
         return;
     }
-    eleSnow = document.getElementById("snow"+id);
+    eleSnow = document.getElementById("snow" + id);
     eleSnow.style.color = SNOW_BASE_COLOR;
 }
 
@@ -114,7 +119,7 @@ function startSingleSnow() {
 
     var id = getId();
 // console.log("get id : " + id + " ids : " + printIds());
-    if(id < 0) {
+    if (id < 0) {
         console.log("get id err");
         return;
     }
@@ -123,21 +128,21 @@ function startSingleSnow() {
 
     //雪花属性
     var eleSnow = document.createElement("div");
-    var snowSize =  30;
-    if (false == isMobile()) {
-      snowSize = 25 + parseInt(25 * Math.random());
+    var snowSize = 30;
+    if (!isMobile()) {
+        snowSize = 25 + parseInt(25 * Math.random());
     } else {
-        snowSize = 35 + parseInt(35 * Math.random());
+        snowSize = 20 + parseInt(20 * Math.random());
     }
     eleSnow.innerHTML = "❅";//'<img src="./pic/snow.png" style="width:{0};height:{1}"></img>'.format(snowSize+"px",snowSize+"px");
     eleSnow.id = "snow" + id;
-    eleSnow.setAttribute("onclick","clickSnow("+ id + ")");
-    eleSnow.setAttribute("onmouseover","touchSnow("+ id + ")");
-    eleSnow.setAttribute("onmouseout","leaveSnow("+ id + ")");
-    eleSnow.setAttribute("posXCenter",tmpLeft + snowSize / 2);
-    eleSnow.setAttribute("style",'text-align:center;font-size:{0}px;color:{1};margin-left:{2}px'//
-        .format(snowSize,SNOW_BASE_COLOR,tmpLeft));
-    eleSnow.setAttribute("snowing",USING);
+    eleSnow.setAttribute("onclick", "clickSnow(" + id + ")");
+    eleSnow.setAttribute("onmouseover", "touchSnow(" + id + ")");
+    eleSnow.setAttribute("onmouseout", "leaveSnow(" + id + ")");
+    eleSnow.setAttribute("posXCenter", tmpLeft + snowSize / 2);
+    eleSnow.setAttribute("style", 'text-align:center;font-size:{0}px;color:{1};margin-left:{2}px'//
+        .format(snowSize, SNOW_BASE_COLOR, tmpLeft));
+    eleSnow.setAttribute("snowing", USING);
 
     eleSnow.style.position = "absolute";
     snowbg.appendChild(eleSnow);
@@ -145,7 +150,7 @@ function startSingleSnow() {
     snowIds[id] = USING;
     // console.log("snowDrop : " + id + " ids : " + printIds());
     currCount++;
-    snowDrop(eleSnow,0,id);
+    snowDrop(eleSnow, 0, id);
 }
 
 var funcIdStartSnow = 0;
@@ -154,9 +159,9 @@ function isMobile() {
     var u = navigator.userAgent;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-    if ( (true == isiOS) || (true == isAndroid)) {
+    if ((true == isiOS) || (true == isAndroid)) {
         return true;
-    } else  {
+    } else {
         return false;
     }
 }
@@ -174,7 +179,7 @@ function startSnow() {
     initIds();
     clearInterval(funcIdStartSnow);
 
-    funcIdStartSnow = setInterval(function() {
+    funcIdStartSnow = setInterval(function () {
         if (currCount < SNOW_MAX_COUNT) {
             startSingleSnow();
         }

@@ -15,6 +15,13 @@ function xnjy_init() {
     //     document.body.style.background = "#0303ff";
     // }
 
+	var back_color = document.body.style.background;
+	
+	//var COLORS = ["#ffc703","#0303ff"];
+	//if(!$.inArray(back_color, COLORS)||(0==back_color.length)) {
+    document.body.style.background = "#ffc703";
+	//}
+
     var bl = 1.0;
     var back = document.getElementById('div_back');
     var back_height = $(back).height();
