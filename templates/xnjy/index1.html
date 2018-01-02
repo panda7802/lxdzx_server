@@ -114,13 +114,12 @@
     });
 </script>
 <script>
-	return
     var base_path = "http://www.pandafly.cn/";
     var self_link = window.location.href;
     $(function () {
         /***用户点击分享到微信圈后加载接口接口*******/
         var url = window.location.href.split('#')[0];
-        var send_url = base_path + "xnjyshare?url=" + encodeURIComponent(url);
+        var send_url = base_path + "lxdzx/xnjyshare?url=" + encodeURIComponent(url);
         console.log("url:" + send_url);
         $.ajax({
             url: send_url,

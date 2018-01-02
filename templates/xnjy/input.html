@@ -86,7 +86,7 @@
             <div class="flag" style="display:inline;float: left;"><b>地点</b></div>
             <textarea class="layui-input-block textarea_cont"
                       style="width: 77%;height: 80%;display:inline;float: left;"
-                      id="input_school" placeholder="请输入您的国家与学校(限12字)">{{ xnjy.people_id.school }}</textarea>
+                      id="input_school" placeholder="请输入您的国家与学校或其他(限12字)">{{ xnjy.people_id.school }}</textarea>
         </div>
         <br/>
 
@@ -178,6 +178,15 @@
         var parm = get_query_string("parm", "");
         var nick_name = document.getElementById("input_nick_name").value;
         nick_name = nick_name.toString();
+		 if  (nick_name.length <= 0) {
+			layui.layer.open({
+				title: '输入有误',
+				content: '姓名不得为空'
+			});
+			return;
+		}
+
+
         var lx_time = document.getElementById("input_lx_time").value;
         lx_time = lx_time.toString();
         var s = "";
@@ -192,19 +201,19 @@
         lx_time = s;
         var school = document.getElementById("input_school").value;
         school = school.toString();
-        if (school.length > 12) {
+        if  ((school.length <= 0)||(school.length > 12)) {
             layui.layer.open({
                 title: '输入有误',
-                content: '国家学校名称不得超过12字'
+                content: '国家学校名称必须为1~12字'
             });
             return;
         }
         var jy = document.getElementById("input_jy").value;
         jy = jy.toString();
-        if (jy.length >= 40) {
+        if ((jy.length <= 0)||(jy.length >= 40)) {
             layui.layer.open({
                 title: '输入有误',
-                content: '新年寄语不得超过40字'
+                content: '新年寄语必须为1~40字'
             });
             return;
         }

@@ -157,7 +157,7 @@ class Xnjy(models.Model):
 
     def __unicode__(self):
         try:
-            s = self.people_id.wx_name + " : " + self.school
+            s = self.people_id.name + " : " + self.school
         except Exception, e:
             logging.error(str(e))
             s = "get db err"

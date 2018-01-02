@@ -24,7 +24,9 @@ from django.views.static import serve
 urlpatterns = [
     url(r'^$', t_index),
     url(r'^MP_verify_e3MyIfTydXwqxprn.txt', t_wx_web),
+    url(r'^MP_verify_rhm9oyjPc3nd0dVB.txt', t_wx_web_self),
     url(r'^t_test_amaze/', t_test_amaze),
+    url(r'^xnjyshare', xnjyshare),
     url(r'^test_layui/(.*)', t_test_layui),
     url(r'^admin/', admin.site.urls),
     url(r'^trans/(.*)', trans_url),

@@ -35,6 +35,13 @@ def t_wx_web(request):
     return HttpResponse(s)
 
 
+
+def t_wx_web_self(request):
+    t = get_template('MP_verify_rhm9oyjPc3nd0dVB.txt')
+    s = t.render()
+    return HttpResponse(s)
+
+
 def wx_token(request):
     try:
         # s = "panguotian"
@@ -184,6 +191,11 @@ def login(request):
 #     return logic.play_ctrl.statistics_videos(request)
 
 
+def xnjyshare1(request):
+    s = xnjy_share(request)
+    return HttpResponse(s)
+
+
 def lxdzx(request, action):
     print request.get_full_path()
     logging.debug(request.get_host() + " -- " + request.get_full_path())
@@ -194,6 +206,24 @@ def lxdzx(request, action):
             logging.debug(t)
             s = t.render()
             return
+        elif action == "xnjy_index":
+            s = xnjy_index(request)
+            return s
+        elif action == "xnjy_index1":
+            s = xnjy_index1(request)
+            return s
+        elif action == "xnjy_gzh":
+            s = xnjy_gzh(request)
+            return s
+        elif action == "xnjy_input":
+            s = xnjy_input(request)
+            return s
+        elif action == "xnjy_show":
+            s = xnjy_show(request)
+            return s
+        elif action == "xnjyshare":
+            s = xnjy_share(request)
+            return s
 
         # 校验
         json_obj, session_res = t_url_tools.parse_url(request)
@@ -234,12 +264,19 @@ def lxdzx(request, action):
                                              err_code=t_url_tools.ERR_CODE_EXCEPTION)
     except Exception, e:
         traceback.print_exc()
+        logging.exception(e)
         s = t_url_tools.get_response_str({}, success=False, msg=action + " 异常",
                                          err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
         print s
         logging.debug(s)
         return HttpResponse(s)
+
+
+def xnjyshare(request,action):
+	s = xnjy_share(request)
+	return HttpResponse(s)
+
 
 
 def lxdzx_show(request, action):
@@ -253,12 +290,16 @@ def lxdzx_show(request, action):
             s = t_index(request)
         elif action == "xnjy_index":
             s = xnjy_index(request)
+        elif action == "xnjy_index1":
+            s = xnjy_index1(request)
         elif action == "xnjy_gzh":
             s = xnjy_gzh(request)
         elif action == "xnjy_input":
             s = xnjy_input(request)
         elif action == "xnjy_show":
             s = xnjy_show(request)
+        elif action == "xnjyshare":
+            s = xnjy_share(request)
         elif action == "MP_verify_e3MyIfTydXwqxprn.txt":
             t = get_template('MP_verify_e3MyIfTydXwqxprn.txt')
             s = t.render()
@@ -283,3 +324,4 @@ def del_video_comment(request):
 
 def get_video_comment(request):
     return logic.play_ctrl.get_video_comment(request)
+
