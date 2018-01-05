@@ -114,7 +114,7 @@
     });
 </script>
 <script>
-    var base_path = "http://www.pandafly.cn/";
+	  var base_path = "http://www.pandafly.cn/";
     var self_link = window.location.href;
     $(function () {
         /***用户点击分享到微信圈后加载接口接口*******/
@@ -129,8 +129,9 @@
             dataType: "json",
             success: function (data) {
                 wx.config({
-                    debug: true,
-                    appId: 'wxaa3e9bee4d1d172d',
+                    debug: false,
+                   appId: 'wxaa3e9bee4d1d172d',
+ //                   appId: 'wx29db0e2cd630f115',
                     timestamp: data.timeStamp,
                     nonceStr: data.nonceStr,
                     signature: data.signature,
@@ -167,7 +168,7 @@
                             //alert('用户点击发送给朋友');
                         },
                         success: function (res) {
-                            {#                            alert('您已获得抽奖机会，赶紧去赢大奖吧～～');#}
+                            
                         },
                         cancel: function (res) {
                             //alert('已取消');
@@ -187,7 +188,7 @@
                             //alert('用户点击分享到朋友圈');
                         },
                         success: function (res) {
-                            {#                            alert('您已获得抽奖机会，赶紧去赢大奖吧～～');#}
+                            
                             //分享之后增加游戏次数
                         },
                         cancel: function (res) {
@@ -209,6 +210,7 @@
             }
         });
     });
+
 </script>
 </body>
 </html>

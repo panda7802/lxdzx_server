@@ -163,7 +163,7 @@ LOGGING = {
     'formatters': {
         'standard': {
            # 'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'
-            'format': '%(asctime)s [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'
+            'format': '%(asctime)s [%(module)s:%(funcName)s.%(lineno)s] [%(levelname)s]- %(message)s'
         }  # 日志格式
     },
     'filters': {

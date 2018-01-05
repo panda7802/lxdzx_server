@@ -47,6 +47,121 @@ function xnjy_init() {
     }
 }
 
+var share_title = "我的时间胶囊";
+var share_pic = "https://www.pandafly.cn/static/img/xnjy/icon.jpg";
+var share_desc = "留学的真相-我的时间胶囊";
+var share_link = window.location.href;
 
 
+/**
+ *微信分享
+ */
+function jssdk_share() {
+	console.log("init share");
+	var base_path = "http://www.pandafly.cn/";
+    $(function () {
+        /***用户点击分享到微信圈后加载接口接口*******/
+        var url = window.location.href.split('#')[0];
+	//	url = url.split('?')[0];
+	//	url = decodeURIComponent(url);
+	//	alert(url);
+        var send_url = base_path + "lxdzx/xnjyshare?url=" +encodeURI(url);// + encodeURIComponent(url);
+//		alert(url);
+//		alert(send_url);
+        console.log("url:" + send_url);
+        $.ajax({
+            url: send_url,
+			data:'',
+            type: "Get",
+            async: true,
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                wx.config({
+                   debug: false,
+                   appId: 'wxaa3e9bee4d1d172d',
+ //                   appId: 'wx29db0e2cd630f115',
+                    timestamp: data.timeStamp,
+                    nonceStr: data.nonceStr,
+                    signature: data.signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'hideOptionMenu',
+                        'onMenuShareAppMessage'
+                    ]
+                });
+                wx.error(function (res) {
+                    console.error("wx err");
+                });
+                wx.ready(function () {
+                    console.log("ready");
+                    //wx.hideOptionMenu();/***隐藏分享菜单****/
+                    wx.checkJsApi({
+                        jsApiList: [
+                            'getLocation',
+                            'onMenuShareTimeline',
+                            'onMenuShareAppMessage'
+                        ],
+                        success: function (res) {
+							console.log(res);
+                            //alert(res.errMsg);
+                        }
+                    });
+
+                    wx.onMenuShareAppMessage({
+                        title: share_title,
+                        desc: share_desc,
+                        link: share_link,
+                        imgUrl:share_pic,
+                        trigger: function (res) {
+                            //alert('用户点击发送给朋友');
+                        },
+                        success: function (res) {
+                            
+                        },
+                        cancel: function (res) {
+                            //alert('已取消');
+                        },
+                        fail: function (res) {
+                            alert(res.errMsg);
+                        }
+                    });
+
+                    // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+                    wx.onMenuShareTimeline({
+                        title: share_title,
+                        desc: share_desc,
+                        link: share_link,
+                        imgUrl:share_pic,
+                        trigger: function (res) {
+                            //alert('用户点击分享到朋友圈');
+                        },
+                        success: function (res) {
+                          //  alert("share succ");
+                            //分享之后增加游戏次数
+                        },
+						complete: function (res) {
+						//	alert(e);
+                         },
+                        cancel: function (res) {
+                          //  alert('已取消');
+                        },
+                        fail: function (res) {
+                            alert(res.errMsg);
+                        }
+                    });
+
+                    wx.error(function (res) {
+                        alert(res.errMsg);
+                    });
+                });
+            },
+            error: function () {
+                alert('ajax request failed!!!!');
+                return;
+            }
+        });
+    });
+}
 

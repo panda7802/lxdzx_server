@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>我的秒表</title>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="/static/js/xnjy.js"></script>
     <script type="text/javascript" src="/static/js/t_tools.js"></script>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
@@ -110,6 +111,7 @@
 </div>
 <script>
     xnjy_init();
+	jssdk_share();
 
     //设置底部按钮宽度
     var back = document.getElementById('div_back');
@@ -227,6 +229,7 @@
         send_data.school = school;
         send_data.jy = jy;
         parm = JSON.stringify(send_data);
+		parm = parm.replace("{","%7b").replace("}","%7d");
         console.log(parm);
         $.ajax({
             url: "../lxdzx/xnjy_save_xnjy?parm=" + parm,

@@ -67,6 +67,7 @@
 
     init_back();
     xnjy_init();
+	jssdk_share();
 
     //设置底部按钮宽度
     var back = document.getElementById('div_back');
@@ -113,103 +114,6 @@
         var element = layui.element;
     });
 </script>
-<script>
-	return
-    var base_path = "http://www.pandafly.cn/";
-    var self_link = window.location.href;
-    $(function () {
-        /***用户点击分享到微信圈后加载接口接口*******/
-        var url = window.location.href.split('#')[0];
-        var send_url = base_path + "xnjyshare?url=" + encodeURIComponent(url);
-        console.log("url:" + send_url);
-        $.ajax({
-            url: send_url,
-            type: "Get",
-            async: true,
-            cache: false,
-            dataType: "json",
-            success: function (data) {
-                wx.config({
-                    debug: true,
-                    appId: 'wxaa3e9bee4d1d172d',
-                    timestamp: data.timeStamp,
-                    nonceStr: data.nonceStr,
-                    signature: data.signature,
-                    jsApiList: [
-                        'checkJsApi',
-                        'onMenuShareTimeline',
-                        'hideOptionMenu',
-                        'onMenuShareAppMessage'
-                    ]
-                });
-                wx.error(function (res) {
-                    console.error("wx err");
-                });
-                wx.ready(function () {
-                    console.log("ready");
-                    //wx.hideOptionMenu();/***隐藏分享菜单****/
-                    wx.checkJsApi({
-                        jsApiList: [
-                            'getLocation',
-                            'onMenuShareTimeline',
-                            'onMenuShareAppMessage'
-                        ],
-                        success: function (res) {
-                            //alert(res.errMsg);
-                        }
-                    });
-
-                    wx.onMenuShareAppMessage({
-                        title: '我的秒表',
-                        desc: '这是我的秒表',
-                        link: self_link,
-                        imgUrl: 'https://www.pandafly.cn/static/img/xnjy/icon.jpg',
-                        trigger: function (res) {
-                            //alert('用户点击发送给朋友');
-                        },
-                        success: function (res) {
-                            {#                            alert('您已获得抽奖机会，赶紧去赢大奖吧～～');#}
-                        },
-                        cancel: function (res) {
-                            //alert('已取消');
-                        },
-                        fail: function (res) {
-                            alert(res.errMsg);
-                        }
-                    });
-
-                    // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
-                    wx.onMenuShareTimeline({
-                        title: '我的秒表',
-                        desc: '这是我的秒表',
-                        link: self_link,
-                        imgUrl: 'https://www.pandafly.cn/static/img/xnjy/icon.jpg',
-                        trigger: function (res) {
-                            //alert('用户点击分享到朋友圈');
-                        },
-                        success: function (res) {
-                            {#                            alert('您已获得抽奖机会，赶紧去赢大奖吧～～');#}
-                            //分享之后增加游戏次数
-                        },
-                        cancel: function (res) {
-                            //alert('已取消');
-                        },
-                        fail: function (res) {
-                            alert(res.errMsg);
-                        }
-                    });
-
-                    wx.error(function (res) {
-                        alert(res.errMsg);
-                    });
-                });
-            },
-            error: function () {
-                alert('ajax request failed!!!!');
-                return;
-            }
-        });
-    });
-</script>
 </body>
 </html>
+
