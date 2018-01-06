@@ -7,6 +7,8 @@ import json
 import time
 import urllib
 from json import JSONDecoder
+
+import urllib2
 from tutils import twx_tools
 from django.template.loader import get_template
 import logging
@@ -19,13 +21,13 @@ def xnjy_save_xnjy(json_obj):
     # 增加微信名称
     nick_name = json_obj['nick_name']
     people = People.objects.filter(name=nick_name)
- #   people_count = people.__len__()
+    #   people_count = people.__len__()
     people_count = 0
     if people_count <= 0:
         people = People()
         people.name = nick_name
         people.save()
- #       people = People.objects.filter(name=nick_name).first()
+        #       people = People.objects.filter(name=nick_name).first()
     else:
         people = people.first()
 
@@ -58,7 +60,6 @@ def xnjy_get_xnjy(json_obj):
     # res = {"id": people_id}
     s = t_url_tools.get_response_str({'res': res_item})
     return s
-
 
 
 def xnjy_index1(request):
@@ -149,7 +150,7 @@ def xnjy_show(request):
 
     ui_type = 1
     try:
-    	json_obj, session_res = t_url_tools.parse_url(request)
+        json_obj, session_res = t_url_tools.parse_url(request)
         ui_type = int(json_obj['ui_type'])
     except Exception, e:
         pass
@@ -176,9 +177,6 @@ def xnjy_show(request):
     return s
 
 
-import urllib2
-
-
 def xnjy_gzh(request):
     ui_type = 0
     try:
@@ -189,7 +187,7 @@ def xnjy_gzh(request):
 
     url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa3e9bee4d1d172d&redirect_uri=https%3a%2f%2fwww.pandafly.cn%2flxdzx_show%2fxnjy_gzh&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
     res = urllib2.urlopen(url).read()
- #   logging.debug("xnjy_gzh : " + res)
+    #   logging.debug("xnjy_gzh : " + res)
 
     # s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     #   s = "panguotian"
@@ -204,16 +202,16 @@ def xnjy_share(request):
     url = request.GET.get("url")
     url = str(url)
     url = url.split('&_=')[0];
-    #url = urllib.unquote(url)
-    logging.debug("---url : "  + url)
-    url = url.replace("%7B","{").replace("%7D","}")
- #   urls = url.split('?')
- #   if urls.__len__() > 0:
- #       url_parm = urls[1]
- #       url_parm = urllib.quote(url_parm)
- #       url_parm = url_parm.replace("%3D%7B","={").replace("%7D","}")
- #       url_parm = url_parm.replace("\"","%22")
- #       url = urls[0] + '?' + url_parm
+    # url = urllib.unquote(url)
+    logging.debug("---url : " + url)
+    url = url.replace("%7B", "{").replace("%7D", "}")
+    #   urls = url.split('?')
+    #   if urls.__len__() > 0:
+    #       url_parm = urls[1]
+    #       url_parm = urllib.quote(url_parm)
+    #       url_parm = url_parm.replace("%3D%7B","={").replace("%7D","}")
+    #       url_parm = url_parm.replace("\"","%22")
+    #       url = urls[0] + '?' + url_parm
     logging.debug("parse url " + url)
     res = {}
     res['timeStamp'] = timeStamp
@@ -222,5 +220,3 @@ def xnjy_share(request):
     res['signature'] = twx_tools.get_sing(url, timeStamp, nonceStr)
     s = json.dumps(res)
     return s
-
-

@@ -117557,3 +117557,4 @@ AttributeError: 'NoneType' object has no attribute 'split'
 2017-12-28 21:49:47,551 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22e%22,%22lx_time%22:%2220171227%22,%22school%22:%22b%22,%22jy%22:%22c%22%7D
 2017-12-28 21:50:01,068 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22e%22,%22lx_time%22:%2220171227%22,%22school%22:%22b%22,%22jy%22:%22c%22%7D
 2017-12-28 21:50:52,013 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22ff%22,%22lx_time%22:%2220170104%22,%22school%22:%2244%22,%22jy%22:%22eee%22%7D
+2018-01-06 09:46:18,512 [views:lxdzx_show.283] [DEBUG]- /lxdzx_show/xnjy_share

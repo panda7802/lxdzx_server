@@ -47,20 +47,20 @@ function xnjy_init() {
     }
 }
 
-var share_title = "ÎÒµÄÊ±¼ä½ºÄÒ";
+var share_title = "æˆ‘çš„æ—¶é—´èƒ¶å›Š";
 var share_pic = "https://www.pandafly.cn/static/img/xnjy/icon.jpg";
-var share_desc = "ÁôÑ§µÄÕæÏà-ÎÒµÄÊ±¼ä½ºÄÒ";
+var share_desc = "ç•™å­¦çš„çœŸç›¸-æˆ‘çš„æ—¶é—´èƒ¶å›Š";
 var share_link = window.location.href;
 
 
 /**
- *Î¢ĞÅ·ÖÏí
+ *å¾®ä¿¡åˆ†äº«
  */
 function jssdk_share() {
 	console.log("init share");
 	var base_path = "http://www.pandafly.cn/";
     $(function () {
-        /***ÓÃ»§µã»÷·ÖÏíµ½Î¢ĞÅÈ¦ºó¼ÓÔØ½Ó¿Ú½Ó¿Ú*******/
+        /***ç”¨æˆ·ç‚¹å‡»åˆ†äº«åˆ°å¾®ä¿¡åœˆååŠ è½½æ¥å£æ¥å£*******/
         var url = window.location.href.split('#')[0];
 	//	url = url.split('?')[0];
 	//	url = decodeURIComponent(url);
@@ -96,7 +96,7 @@ function jssdk_share() {
                 });
                 wx.ready(function () {
                     console.log("ready");
-                    //wx.hideOptionMenu();/***Òş²Ø·ÖÏí²Ëµ¥****/
+                    //wx.hideOptionMenu();/***éšè—åˆ†äº«èœå•****/
                     wx.checkJsApi({
                         jsApiList: [
                             'getLocation',
@@ -115,37 +115,37 @@ function jssdk_share() {
                         link: share_link,
                         imgUrl:share_pic,
                         trigger: function (res) {
-                            //alert('ÓÃ»§µã»÷·¢ËÍ¸øÅóÓÑ');
+                            //alert('ç”¨æˆ·ç‚¹å‡»å‘é€ç»™æœ‹å‹');
                         },
                         success: function (res) {
                             
                         },
                         cancel: function (res) {
-                            //alert('ÒÑÈ¡Ïû');
+                            //alert('å·²å–æ¶ˆ');
                         },
                         fail: function (res) {
                             alert(res.errMsg);
                         }
                     });
 
-                    // 2.2 ¼àÌı¡°·ÖÏíµ½ÅóÓÑÈ¦¡±°´Å¥µã»÷¡¢×Ô¶¨Òå·ÖÏíÄÚÈİ¼°·ÖÏí½á¹û½Ó¿Ú
+                    // 2.2 ç›‘å¬â€œåˆ†äº«åˆ°æœ‹å‹åœˆâ€æŒ‰é’®ç‚¹å‡»ã€è‡ªå®šä¹‰åˆ†äº«å†…å®¹åŠåˆ†äº«ç»“æœæ¥å£
                     wx.onMenuShareTimeline({
                         title: share_title,
                         desc: share_desc,
                         link: share_link,
                         imgUrl:share_pic,
                         trigger: function (res) {
-                            //alert('ÓÃ»§µã»÷·ÖÏíµ½ÅóÓÑÈ¦');
+                            //alert('ç”¨æˆ·ç‚¹å‡»åˆ†äº«åˆ°æœ‹å‹åœˆ');
                         },
                         success: function (res) {
                           //  alert("share succ");
-                            //·ÖÏíÖ®ºóÔö¼ÓÓÎÏ·´ÎÊı
+                            //åˆ†äº«ä¹‹åå¢åŠ æ¸¸æˆæ¬¡æ•°
                         },
 						complete: function (res) {
 						//	alert(e);
                          },
                         cancel: function (res) {
-                          //  alert('ÒÑÈ¡Ïû');
+                          //  alert('å·²å–æ¶ˆ');
                         },
                         fail: function (res) {
                             alert(res.errMsg);

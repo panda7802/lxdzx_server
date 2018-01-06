@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from love.views import *
 from lxdzx_server import settings
 from trans.views import *
 from video_manager.views import *
@@ -37,4 +38,5 @@ urlpatterns = [
     url(r'^lxdzx/(.*)', lxdzx),
     url(r'^lxdzx_show/(.*)', lxdzx_show),
     url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),
+    url(r'^love/', love_index),
 ]
