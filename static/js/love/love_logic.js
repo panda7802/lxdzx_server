@@ -1,3 +1,5 @@
+var show_len = 0;
+
 function goto_show() {
     var self_url = window.location.href;
     var obj_url = self_url.indexOf("#") >= 0 ? self_url : self_url + "#future";
@@ -68,7 +70,7 @@ var items = new Array();
 var stimes = new Array();
 
 function count_time() {
-    for (var i = 1; i <= 5; i++) {
+    for (var i = 1; i <= show_len; i++) {
         var time_item = document.getElementById("far" + i);
         console.log("far" + i + "------" + document.getElementById("far" + i))
         if ((null === time_item) || (undefined === time_item)) {
@@ -88,7 +90,8 @@ function count_time() {
     }
 }
 
-function love_init() {
+function love_init(len) {
+    show_len = len
     start_love();
     startSnow();
     count_time();

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%;">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>LOVE YOU</title>
+    <title>YOU</title>
 
     <link href="/static/css/default.css" type="text/css" rel="stylesheet">
     <link href="/static/css/main.css" type="text/css" rel="stylesheet">
@@ -18,28 +18,26 @@
 
 <body style="background:#010138;">
 <div id="us_record" style="height: 100%;width: 100%;text-align: center;position:relative;">
-    <div style="text-align: center;margin: 0 auto">
-        <table border="0" cellspacing="0" cellpadding="5"
-               style="color: #fff;font-size: 15pt;margin: 0 auto;position: absolute;
-        top: 50%;transform: translateY(-50%);">
-            {% for item in res %}
-                <tr id="item{{ forloop.counter }}">
-                    <td style="text-align: left">
-                        <div id="title{{ forloop.counter }}">{{ item.title }}</div>
-                    </td>
-                    <td style="text-align: left">
-                        <div id="desc{{ forloop.counter }}">{{ item.desc }}</div>
-                    </td>
-                    <td style="text-align: left">
-                        <div id="time{{ forloop.counter }}">{{ item.time }}</div>
-                    </td>
-                    <td style="text-align: left">
-                        <div id="far{{ forloop.counter }}"></div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
+    <table border="0" cellspacing="0" cellpadding="5"
+           style="color: #fff;font-size: 15pt;margin: 0 auto;position: absolute;
+           left: 50%;top: 50%;transform: translate(-50%,-50%);">
+        {% for item in res %}
+            <tr id="item{{ forloop.counter }}">
+                <td style="text-align: left">
+                    <div id="title{{ forloop.counter }}">{{ item.title }}</div>
+                </td>
+                <td style="text-align: left">
+                    <div id="desc{{ forloop.counter }}">{{ item.desc }}</div>
+                </td>
+                <td style="text-align: left">
+                    <div id="time{{ forloop.counter }}">{{ item.time }}</div>
+                </td>
+                <td style="text-align: left">
+                    <div id="far{{ forloop.counter }}"></div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 
 <div id="future">
@@ -67,7 +65,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    love_init();
+    love_init({{ len }});
 </script>
 
 </body>
