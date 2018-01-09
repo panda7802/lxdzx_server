@@ -99,8 +99,11 @@ var show_item = function (item_id) {
     item.style.visibility = "visible";
     item.setAttribute("class", "tlayui-anim " + ANINS[(item_id - 1) % ANINS.length]);
 };
+<<<<<<< HEAD
 
 var TIME_UNIT = 2000;
+=======
+>>>>>>> b32fb1dd732da9417b1a6aa0d77b68ead3a69765
 
 function count_time() {
     for (var i = 1; i <= show_len; i++) {
@@ -108,7 +111,11 @@ function count_time() {
         var timestamp2 = Date.parse(new Date(stime));
         document.getElementById("time" + i).innerHTML = stime.substr(0, 10);
         item_count_time(i, timestamp2);
+<<<<<<< HEAD
         setTimeout("show_item(" + i + ")", TIME_UNIT * (i - 1));
+=======
+        setTimeout("show_item(" + i + ")", 1000 * (i - 1));
+>>>>>>> b32fb1dd732da9417b1a6aa0d77b68ead3a69765
     }
 }
 
@@ -118,6 +125,7 @@ function love_init(len) {
     var back = document.getElementById('us_record');
     var back_height = $(back).height();
     var back_width = $(back).width();
+<<<<<<< HEAD
     var pic_fix = "/static/img/love/";
     if (back_height > back_width) {
         pic_fix += "v/";
@@ -136,6 +144,17 @@ function love_init(len) {
         start_love();
         startSnow();
     }, (len + 1) * TIME_UNIT);
+=======
+
+    count_time();
+
+    // //超时跳转
+    // setTimeout(function () {
+    //     goto_show();
+    //     start_love();
+    //     startSnow();
+    // }, len * 1000);
+>>>>>>> b32fb1dd732da9417b1a6aa0d77b68ead3a69765
 
 
     jssdk_share();
