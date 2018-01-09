@@ -3,9 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>YOU</title>
-
     <link href="/static/css/default.css" type="text/css" rel="stylesheet">
     <link href="/static/css/main.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/li.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/garden.js"></script>
     <script type="text/javascript" src="/static/js/functions.js"></script>
@@ -16,52 +17,58 @@
     <script type="text/javascript" src="/static/js/love/love_logic.js"></script>
 </head>
 
-<body style="background:#010138;">
-<div id="us_record" style="height: 100%;width: 100%;text-align: center;position:relative;">
-    <table border="0" cellspacing="0" cellpadding="5"
-           style="color: #fff;font-size: 15pt;margin: 0 auto;position: absolute;
-           left: 50%;top: 50%;transform: translate(-50%,-50%);">
-        {% for item in res %}
-            <tr id="item{{ forloop.counter }}">
-                <td style="text-align: left">
-                    <div id="title{{ forloop.counter }}">{{ item.title }}</div>
-                </td>
-                <td style="text-align: left">
-                    <div id="desc{{ forloop.counter }}">{{ item.desc }}</div>
-                </td>
-                <td style="text-align: left">
-                    <div id="time{{ forloop.counter }}">{{ item.time }}</div>
-                </td>
-                <td style="text-align: left">
-                    <div id="far{{ forloop.counter }}"></div>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+<body>
+<div id="back_img"
+     style="background: rgba(1,1,40,1);position:absolute;width: 100%;height: 100%;text-align: center;z-index: 1">
+    <img id="img_back" src="/static/img/love/h/1.jpg" style="margin: 0 auto;">
 </div>
+<div id="cont" style="position: absolute;width: 100%;height: 100%;z-index: 2">
+    <div id="us_record" style="height: 100%;width: 100%;text-align: center;position:relative;">
+        <table border="0" cellspacing="0" cellpadding="5"
+               style="color: #fff;font-size: 15pt;margin: 0 auto;position: absolute;
+           left: 50%;top: 50%;transform: translate(-50%,-50%);">
+            {% for item in res %}
+                <tr id="item{{ forloop.counter }}" style="visibility:hidden">
+                    <td class="item_num">
+                        <div id="title{{ forloop.counter }}">{{ item.title }}</div>
+                    </td>
+                    <td class="item_num">
+                        <div id="desc{{ forloop.counter }}">{{ item.desc }}</div>
+                    </td>
+                    <td class="item_num">
+                        <div id="time{{ forloop.counter }}">{{ item.time }}</div>
+                    </td>
+                    <td class="item_num">
+                        <div id="far{{ forloop.counter }}"></div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
-<div id="future">
-    <div id="mainDiv">
+    <div id="future" style="width: 100%;height: 100%">
+        <div id="mainDiv">
 
-        <div id="content">
-            <div id="loveHeart">
-                <canvas id="garden"></canvas>
-                <div id="words">
-                    <div id="messages">
-                        <div id="say_title">距离我们将要在一起的日子还有</div>
-                        <div id="elapseClock"></div>
-                    </div>
-                    <div id="loveu">
-                        <div id="say_jy">Love you forever</div>
-                        <div class="signature">-- Panda</div>
+            <div id="content">
+                <div id="loveHeart">
+                    <canvas id="garden"></canvas>
+                    <div id="words">
+                        <div id="messages">
+                            <div id="say_title">距离我们将要在一起的日子还有</div>
+                            <div id="elapseClock"></div>
+                        </div>
+                        <div id="loveu">
+                            <div id="say_jy">Love you forever</div>
+                            <div class="signature">-- Panda</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="snowBigBg" id="snowBigBg">
-        <div class="snowbg" id="snowbg"></div>
+        <div class="snowBigBg" id="snowBigBg">
+            <div class="snowbg" id="snowbg"></div>
+        </div>
     </div>
 </div>
 <script type="text/javascript">

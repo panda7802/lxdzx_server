@@ -23,10 +23,15 @@ def love_index(request):
     #     {'title': "牵手", "desc": "用得是过马路法则", "time": "2017-05-28 17:30"},
     # ]}
     items = [
-        {'title': "A", "desc": "1", "time": "2016-03-29 20:45"},
-        {'title': "B", "desc": "2", "time": "2017-04-09 11:45"},
-        {'title': "C", "desc": "3", "time": "2017-05-21 15:10"},
+        {'title': "A", "desc": "1", "time": "2016-03-29 20:45:19"},
+        {'title': "B", "desc": "2", "time": "2017-04-09 11:45:23"},
+        {'title': "C", "desc": "3", "time": "2017-05-21 15:10:45"},
+        {'title': "D", "desc": "4", "time": "2017-05-21 15:10:46"},
+        {'title': "E", "desc": "5", "time": "2017-05-21 15:10:34"},
+        {'title': "F", "desc": "6", "time": "2017-05-21 15:10:52"},
+        {'title': "G", "desc": "7", "time": "2017-05-21 15:10:00"}
     ]
     show_data = {'res': items, 'len': items.__len__()}
     s = t.render(show_data)
     return HttpResponse(s)
+
