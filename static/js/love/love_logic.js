@@ -1,7 +1,14 @@
+var show_len = 0;
+/**是否为横屏*/
+var is_h = true;
+
 function goto_show() {
-    var self_url = window.location.href;
-    var obj_url = self_url.indexOf("#") >= 0 ? self_url : self_url + "#future";
-    window.location.href = obj_url;
+    console.log("show");
+    document.getElementById("us_record").style.display = "none";
+    document.getElementById("future").style.display = "inline";
+    // var self_url = window.location.href;
+    // var obj_url = self_url.indexOf("#") >= 0 ? self_url : self_url + "#future";
+    // window.location.href = obj_url;
 }
 
 function start_love() {
@@ -35,11 +42,23 @@ function start_love() {
     }
 }
 
-function item_count_time(time_item, timestamp2) {
-    if ((null === time_item) || (undefined === time_item)) {
-        return;
-    }
+var UNIT_DAY = "<span class='item_unit'> 天 </span>";
+var UNIT_HOUR = "<span class='item_unit'> 小时 </span>";
+var UNIT_MIN = "<span class='item_unit'> 分钟 </span>";
+var UNIT_SECOND = "<span class='item_unit'> 秒 </span>";
+var UNIT_PASSED = "<span class='item_unit'>已经过去 </span>";
+var UNIT_LIMIT = "<span class='item_unit'>还有 </span>";
+
+/**
+ *  计时
+ * @param time_id
+ * @param timestamp2
+ */
+function item_count_time(time_id, timestamp2) {
+    var time_item = document.getElementById("far" + time_id);
     var date3 = parseInt((new Date()).getTime() - timestamp2);
+
+    //显示时间
     var days = parseInt(date3 / (1000.0 * 60 * 60 * 24)); //Math.abs((date1.getDate() - date2.getDate()));
     //计算出小时数
     var leave1 = date3 % (24 * 3600 * 1000);   //计算天数后剩余的毫秒数
@@ -47,7 +66,7 @@ function item_count_time(time_item, timestamp2) {
     if (hours < 10) {
         hours = "0" + hours;
     }
-    //计算相差分钟数#}
+    //计算相差分钟数
     var leave2 = leave1 % (3600 * 1000);    //计算小时数后剩余的毫秒数
     var minutes = Math.floor(leave2 / (60 * 1000));
     if (minutes < 10) {
@@ -58,43 +77,67 @@ function item_count_time(time_item, timestamp2) {
     if (seconds < 10) {
         seconds = "0" + seconds;
     }
-    var sfix = date3 > 0 ? "已经过去 " : "还有 ";
-    time_item.innerHTML = sfix + days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒"
+    var sfix = date3 > 0 ? UNIT_PASSED : UNIT_LIMIT;
+    time_item.innerHTML = "<div id='limit_" + time_id + "' class='item_num'>" //
+        + sfix + days + UNIT_DAY
+        + hours + UNIT_HOUR
+        + minutes + UNIT_MIN
+        + seconds + UNIT_SECOND//
+        + "</div>";
 
-    setTimeout("item_count_time('time_item', 'timestamp2')", 1000);
+    setTimeout("item_count_time(" + time_id + "," + timestamp2 + ")", 1000);
 }
 
-var items = new Array();
-var stimes = new Array();
+var ANINS = ['tlayui-anim-down', 'tlayui-anim-up', 'tlayui-anim-fadin'];//, 'tlayui-anim-left', 'tlayui-anim-right'];
+// var ANINS = ['tlayui-anim-left', 'tlayui-anim-right'];
+
+/**
+ * 显示项
+ */
+var show_item = function (item_id) {
+    var item = document.getElementById("item" + item_id);
+    item.style.visibility = "visible";
+    item.setAttribute("class", "tlayui-anim " + ANINS[(item_id - 1) % ANINS.length]);
+};
+
+var TIME_UNIT = 2000;
 
 function count_time() {
-    for (var i = 1; i <= 5; i++) {
-        var time_item = document.getElementById("far" + i);
-        console.log("far" + i + "------" + document.getElementById("far" + i))
-        if ((null === time_item) || (undefined === time_item)) {
-            console.log("break");
-            break;
-        }
+    for (var i = 1; i <= show_len; i++) {
         var stime = document.getElementById("time" + i).innerHTML;
         var timestamp2 = Date.parse(new Date(stime));
-        items[i] = time_item;
-        stimes[i] = timestamp2;
-        item_count_time(time_item, timestamp2);
-        // // var bak = document.getElementById("far" + i);
-        // var bak = i;
-        // setInterval(function () {
-        //     item_count_time(items[bak], stimes[bak]);
-        // }, 1000);
+        document.getElementById("time" + i).innerHTML = stime.substr(0, 10);
+        item_count_time(i, timestamp2);
+        setTimeout("show_item(" + i + ")", TIME_UNIT * (i - 1));
     }
 }
 
-function love_init() {
-    start_love();
-    startSnow();
+function love_init(len) {
+    show_len = len;
+
+    var back = document.getElementById('us_record');
+    var back_height = $(back).height();
+    var back_width = $(back).width();
+    var pic_fix = "/static/img/love/";
+    if (back_height > back_width) {
+        pic_fix += "v/";
+    } else {
+        pic_fix += "h/";
+    }
+    var pic_id = parseInt(Math.random() * 6);
+    var pic_path = pic_fix + pic_id + ".jpg";
+    document.getElementById("img_back").src = pic_path;
+
     count_time();
 
     //超时跳转
-    // setTimeout("goto_show()", 1000);
+    setTimeout(function () {
+        goto_show();
+        start_love();
+        startSnow();
+    }, (len + 1) * TIME_UNIT);
+
+
     jssdk_share();
 }
 

@@ -3,7 +3,7 @@
  */
 
 var wx_share_title = "我们";
-var wx_share_pic = "https://www.pandafly.cn/static/img/xnjy/icon.jpg";
+var wx_share_pic = "https://www.pandafly.cn/static/img/love/rose.jpeg";
 var wx_share_desc = "我们的点点滴滴";
 var wx_share_link = window.location.href;
 
