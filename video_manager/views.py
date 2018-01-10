@@ -79,7 +79,8 @@ def t_test_amaze(request):
 
 
 def t_test_layui(request, action):
-    page = 'test_layui_' + action + '.html'
+    page = 'test_layui/test_layui_' + action + '.html'
+    print page
     t = get_template(page)
     s = t.render()
     return HttpResponse(s)

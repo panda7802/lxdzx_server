@@ -117558,3 +117558,36 @@ AttributeError: 'NoneType' object has no attribute 'split'
 2017-12-28 21:50:01,068 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22e%22,%22lx_time%22:%2220171227%22,%22school%22:%22b%22,%22jy%22:%22c%22%7D
 2017-12-28 21:50:52,013 [views:lxdzx_show] [DEBUG]- /lxdzx_show/xnjy_show?parm=%7B%22nick_name%22:%22ff%22,%22lx_time%22:%2220170104%22,%22school%22:%2244%22,%22jy%22:%22eee%22%7D
 2018-01-06 09:46:18,512 [views:lxdzx_show.283] [DEBUG]- /lxdzx_show/xnjy_share
+2018-01-10 16:52:45,796 [views:lxdzx.201] [DEBUG]- 192.168.3.246:8000 -- /lxdzx/login
+2018-01-10 16:52:45,859 [views:lxdzx.267] [ERROR]- 'NoneType' object has no attribute 'split'
+Traceback (most recent call last):
+  File "D:\lxdzx\lxdzx_server\video_manager\views.py", line 229, in lxdzx
+    json_obj, session_res = t_url_tools.parse_url(request)
+  File "D:\lxdzx\lxdzx_server\tutils\t_url_tools.py", line 25, in parse_url
+    json_obj = JSONDecoder().decode(urllib.unquote(parm))
+  File "D:\Python27\lib\urllib.py", line 1234, in unquote
+    bits = s.split('%')
+AttributeError: 'NoneType' object has no attribute 'split'
+2018-01-10 16:52:45,859 [views:lxdzx.272] [DEBUG]- {"msg": "login 异常", "data": {}, "errcode": 4, "success": false}
+2018-01-10 17:23:14,612 [views:lxdzx.201] [DEBUG]- 192.168.3.246:8000 -- /lxdzx/login
+2018-01-10 17:23:14,612 [views:lxdzx.267] [ERROR]- 'NoneType' object has no attribute 'split'
+Traceback (most recent call last):
+  File "D:\lxdzx\lxdzx_server\video_manager\views.py", line 229, in lxdzx
+    json_obj, session_res = t_url_tools.parse_url(request)
+  File "D:\lxdzx\lxdzx_server\tutils\t_url_tools.py", line 25, in parse_url
+    json_obj = JSONDecoder().decode(urllib.unquote(parm))
+  File "D:\Python27\lib\urllib.py", line 1234, in unquote
+    bits = s.split('%')
+AttributeError: 'NoneType' object has no attribute 'split'
+2018-01-10 17:23:14,614 [views:lxdzx.272] [DEBUG]- {"msg": "login 异常", "data": {}, "errcode": 4, "success": false}
+2018-01-10 18:56:47,734 [views:lxdzx.201] [DEBUG]- 192.168.3.246:8000 -- /lxdzx/login
+2018-01-10 18:56:47,736 [views:lxdzx.267] [ERROR]- 'NoneType' object has no attribute 'split'
+Traceback (most recent call last):
+  File "D:\lxdzx\lxdzx_server\video_manager\views.py", line 229, in lxdzx
+    json_obj, session_res = t_url_tools.parse_url(request)
+  File "D:\lxdzx\lxdzx_server\tutils\t_url_tools.py", line 25, in parse_url
+    json_obj = JSONDecoder().decode(urllib.unquote(parm))
+  File "D:\Python27\lib\urllib.py", line 1234, in unquote
+    bits = s.split('%')
+AttributeError: 'NoneType' object has no attribute 'split'
+2018-01-10 18:56:47,736 [views:lxdzx.272] [DEBUG]- {"msg": "login 异常", "data": {}, "errcode": 4, "success": false}
