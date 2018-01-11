@@ -15,3 +15,4 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return str(self.id) + "." + self.title
+
