@@ -12,6 +12,7 @@ from django.template.loader import get_template
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
 def love_index(request):
     t = get_template('love/love_index.html')
     # show_data = {'res': [
