@@ -20,6 +20,8 @@
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="/static/js/wx_funcs.js"></script>
     <script type="text/javascript" src="/static/js/love/love_logic.js"></script>
+    <script type="text/javascript" src="/static/layui/layui.js"></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 
 <body>
@@ -66,7 +68,6 @@
                                     <div id="loveu">
                                         <div id="say_jy">Love you forever</div>
                                         <div class="signature">-- 潘国天</div>
-                                        <div class="signature">-- Panda</div>
                                     </div>
                                 </div>
                             </div>
@@ -87,5 +88,13 @@
             </script>
         </div>
     </div>
+    <img src="/static/img/love/zf.png"
+         onclick="add_zf()"
+         style="left: 100%;top: 100%;transform: translate(-100%,-100%);z-index: 5;position: absolute;display:none">
+</div>
+<script>
+    layui.use('layer', function () {
+    })
+</script>
 </body>
 </html>

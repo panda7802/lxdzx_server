@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'video_manager.apps.VideoManagerConfig',
+    'love.apps.LoveConfig',
 ]
 
 MIDDLEWARE = [

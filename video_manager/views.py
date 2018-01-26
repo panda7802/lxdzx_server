@@ -35,7 +35,6 @@ def t_wx_web(request):
     return HttpResponse(s)
 
 
-
 def t_wx_web_self(request):
     t = get_template('MP_verify_rhm9oyjPc3nd0dVB.txt')
     s = t.render()
@@ -63,7 +62,7 @@ def wx_token(request):
         hashcode = sha1.hexdigest()
         print "handle/GET func: hashcode, signature: ", hashcode, signature
         if hashcode == signature:
-            return HttpResponse(echostr)#echostr
+            return HttpResponse(echostr)  # echostr
         else:
             return ""
     except Exception, Argument:
@@ -80,6 +79,14 @@ def t_test_amaze(request):
 
 def t_test_layui(request, action):
     page = 'test_layui/test_layui_' + action + '.html'
+    print page
+    t = get_template(page)
+    s = t.render()
+    return HttpResponse(s)
+
+
+def t_test_jquery(request, action):
+    page = 'jquery/' + action + '.html'
     print page
     t = get_template(page)
     s = t.render()
@@ -274,10 +281,9 @@ def lxdzx(request, action):
         return HttpResponse(s)
 
 
-def xnjyshare(request,action):
-	s = xnjy_share(request)
-	return HttpResponse(s)
-
+def xnjyshare(request, action):
+    s = xnjy_share(request)
+    return HttpResponse(s)
 
 
 def lxdzx_show(request, action):
@@ -325,4 +331,3 @@ def del_video_comment(request):
 
 def get_video_comment(request):
     return logic.play_ctrl.get_video_comment(request)
-

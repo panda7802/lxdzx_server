@@ -30,3 +30,12 @@ def trans_url(request, url):
         print traceback.format_exc()
     finally:
         return HttpResponse(s)
+
+
+# 给孙子演示用的
+def t_car_check(request, action):
+    page = 'show4grandson/' + action + '.html'
+    t = get_template(page)
+    s = t.render()
+    return HttpResponse(s)
+

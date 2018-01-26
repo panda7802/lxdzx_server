@@ -84,7 +84,6 @@
     animation-name: tlayui-right
 }
 
-
 /*向右动画*/
 @-webkit-keyframes tlayui-fadin {
     from {
@@ -99,3 +98,15 @@
     -webkit-animation-name: tlayui-fadin;
     animation-name: tlayui-fadin
 }
+
+.tphoto {
+    margin: 0 auto;
+    height: 100%;
+    background-size: auto 100%;
+}
+
+.tphoto_page {
+    text-align: center;
+}
+
+

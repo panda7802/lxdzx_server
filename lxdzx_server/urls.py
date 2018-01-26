@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^t_test_amaze/', t_test_amaze),
     url(r'^xnjyshare', xnjyshare),
     url(r'^test_layui/(.*)', t_test_layui),
+    url(r'^test_jquery/(.*)', t_test_jquery),
+    url(r'^t_car_check/(.*)', t_car_check),
     url(r'^admin/', admin.site.urls),
     url(r'^trans/(.*)', trans_url),
     url(r'^notice/', notice),
@@ -39,4 +41,6 @@ urlpatterns = [
     url(r'^lxdzx_show/(.*)', lxdzx_show),
     url(r'^static/(?P<path>.*)$', serve, {'document_root', settings.STATIC_ROOT,}),
     url(r'^love/', love_index),
+    url(r'^marry/', marry),
+    url(r'^loveaction/(.*)$', love_action),
 ]

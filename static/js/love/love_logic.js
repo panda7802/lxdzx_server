@@ -57,7 +57,6 @@ var UNIT_LIMIT = "<span class='item_unit'>还有 </span>";
 function item_count_time(time_id, timestamp2) {
     var time_item = document.getElementById("far" + time_id);
     var date3 = parseInt((new Date()).getTime() - timestamp2);
-
     //显示时间
     var days = parseInt(date3 / (1000.0 * 60 * 60 * 24)); //Math.abs((date1.getDate() - date2.getDate()));
     //计算出小时数
@@ -84,8 +83,10 @@ function item_count_time(time_id, timestamp2) {
         + minutes + UNIT_MIN
         + seconds + UNIT_SECOND//
         + "</div>";
+    if (document.getElementById("us_record").style.display != "none") {
+        setTimeout("item_count_time(" + time_id + "," + timestamp2 + ")", 1000);
+    }
 
-    setTimeout("item_count_time(" + time_id + "," + timestamp2 + ")", 1000);
 }
 
 var ANINS = ['tlayui-anim-down', 'tlayui-anim-up', 'tlayui-anim-fadin'];//, 'tlayui-anim-left', 'tlayui-anim-right'];
@@ -112,12 +113,40 @@ function count_time() {
     }
 }
 
+function init_zfys() {
+    $.ajax({
+        url: "../loveaction/getZfs?parm={}",
+        success: function (data) {
+            console.log(data);
+            data = JSON.parse(data);
+            if (data.success) {
+                var res = data.data;
+                console.log(res);
+                if (res.length > 0) {
+                    poems = [];
+                    for (var key in  res) {
+                        if (res[key].name.length > 0) {
+                            poems.push(res[key].zf + "<br/>-- " + res[key].name)
+                        } else {
+                            poems.push(res[key].zf)
+                        }
+
+                    }
+                }
+            }
+        }
+    });
+}
+
+var back_height = 0;
+var back_width = 0;
+
 function love_init(len) {
     show_len = len;
 
     var back = document.getElementById('us_record');
-    var back_height = $(back).height();
-    var back_width = $(back).width();
+    back_height = $(back).height();
+    back_width = $(back).width();
     var pic_fix = "/static/img/love/";
     if (back_height > back_width) {
         pic_fix += "v/";
@@ -136,16 +165,85 @@ function love_init(len) {
         start_love();
         startSnow();
     }, (len + 1) * TIME_UNIT);
-    count_time();
-
-    // //超时跳转
-    // setTimeout(function () {
-    //     goto_show();
-    //     start_love();
-    //     startSnow();
-    // }, len * 1000);
 
 
     jssdk_share();
+
+    // init_zfys();
+
 }
 
+/**
+ * 增加祝福语
+ */
+function add_zf() {
+    // var name = prompt("请留下您的姓名:", "");
+    // if (name.length < 0) {
+    //     return;
+    // }
+    // $.ajax({
+    //     url: "../loveaction/getZfByName?parm={\"name\":\"" + name + "\"}",
+    //     success: function (data) {
+    //         data = JSON.parse(data);
+    //         if (data.success) {
+    // 祝福语输入
+    var zf = prompt("请留下您的祝福:", "");
+    var send = "../loveaction/addzf?parm={\"name\":\"" + name + "\",\"zf\":\"" + zf + "\"}";
+    if (zf.length <= 0) {
+        return;
+    }
+    $.ajax({
+        url: send,
+        success: function (data) {
+            init_zfys();
+            layer.msg('谢谢您的祝福，触摸雪花可以看到大家的祝福');
+        }
+    });
+    //         }
+    //     }
+    // });
+    // var layer = layui.layer;
+    // // 姓名输入
+    // layer.prompt({
+    //     formType: 2,
+    //     anim: 5,
+    //     btnAlign: 'c',//居中
+    //     value: name,
+    //     title: '请留下您的姓名',
+    //     area: ['300px', '140px'] //自定义文本域宽高
+    // }, function (value, index, elem) {
+    //     document.body.style.zoom = 1;
+    //     var name = value;
+    //     $.ajax({
+    //         url: "../loveaction/getZfByName?parm={\"name\":\"" + name + "\"}",
+    //         success: function (data) {
+    //             data = JSON.parse(data);
+    //             if (data.success) {
+    //                 layer.close(index);
+    //                 // 祝福语输入
+    //                 layer.prompt({
+    //                     formType: 2,
+    //                     anim: 5,
+    //                     btnAlign: 'c',//居中
+    //                     value: data.data.zf,
+    //                     title: '请留下您的祝福',
+    //                     area: ['300px', '140px'] //自定义文本域宽高
+    //                 }, function (value, index, elem) {
+    //                     var zf = value;
+    //                     layer.close(index);
+    //                     $.ajax({
+    //                         url: "../loveaction/addzf?parm={\"name\":\"" + name + "\",\"zf\":\"" + zf + "\"}",
+    //                         success: function (data) {
+    //                             document.body.style.zoom = 1;
+    //                             document.body.style.cssText += '; -moz-transform: scale(' + size + ');-moz-transform-origin: 0 0; ';
+    //                             console.log(data);
+    //                             init_zfys();
+    //                             layer.msg('谢谢您的祝福，触摸雪花可以看到大家的祝福');
+    //                         }
+    //                     });
+    //                 });
+    //             }
+    //         }
+    //     });
+    // });
+}

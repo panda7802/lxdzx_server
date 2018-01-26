@@ -34,7 +34,7 @@ function snowDrop(eleSnow, currPos, id) {
         console.log("eleSnow is null");
         return;
     }
-    var snowSpeed = 4 + parseInt(3 * Math.random());
+    var snowSpeed = 3 + parseInt(2 * Math.random());
     var funId = setInterval(function () {
         currPos += snowSpeed;
         eleSnow.style.top = currPos + "px";
@@ -91,6 +91,7 @@ function clickSnow(id) {
         textSize = 20;
     }
     eleSnow.style.fontSize = textSize + "px";
+    eleSnow.style.textAlign = "right";
     // console.log("textSize : " + textSize + " , " + showText.length);
     eleSnow.style.marginLeft = parseInt(xPos - textSize * showText.length / 2) + "px";
     eleSnow.innerHTML = showText;
