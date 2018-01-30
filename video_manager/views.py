@@ -93,6 +93,13 @@ def t_test_jquery(request, action):
     return HttpResponse(s)
 
 
+def t_test_bootstrap(request, action):
+    page = 'bootstrap/' + action + '.html'
+    print page
+    t = get_template(page)
+    s = t.render()
+    return HttpResponse(s)
+
 def notice(request):
     t = get_template('notice.html')
     s = t.render()

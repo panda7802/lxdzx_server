@@ -185,13 +185,35 @@ def xnjy_gzh(request):
     except Exception, e:
         pass
 
-    url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa3e9bee4d1d172d&redirect_uri=https%3a%2f%2fwww.pandafly.cn%2flxdzx_show%2fxnjy_gzh&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-    res = urllib2.urlopen(url).read()
+    #url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa3e9bee4d1d172d&redirect_uri=https%3a%2f%2fwww.pandafly.cn%2flxdzx_show%2fxnjy_gzh&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+    #res = urllib2.urlopen(url).read()
     #   logging.debug("xnjy_gzh : " + res)
 
     # s = t.render({'xnjy': xnjy, 'ui_type': ui_type})
     #   s = "panguotian"
+    code = request.GET.get('code')
+    appid = "wxaa3e9bee4d1d172d"
+    secret = "d0a7b8b491c15da6e3670da3d142495e"
+    #获取openid
+    url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code"
+    res = urllib2.urlopen(url).read()
+    logging.debug(res)
+    json_obj = JSONDecoder().decode(urllib.unquote(res))
+    open_id = json_obj['openid']
+    logging.debug("open_id : " + open_id)
+    
+    #获取access_token
+    #url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code"
+    #res = urllib2.urlopen(url).read()
+    #logging.debug(res)
+    #json_obj = JSONDecoder().decode(urllib.unquote(res))
+    access_token = json_obj['access_token'] #twx_tools.getAccessToken(appid,secret)
+    #获取用户信息
+    url = "https://api.weixin.qq.com/sns/userinfo?access_token="+access_token+"&openid="+open_id+"&lang=zh_CN"  
+    res = urllib2.urlopen(url).read()
+    logging.debug(res)
     s = res
+    
     return s
 
 
