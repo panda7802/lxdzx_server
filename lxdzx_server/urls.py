@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^test_jquery/(.*)', t_test_jquery),
     url(r'^t_test_bootstrap/(.*)', t_test_bootstrap),
     url(r'^t_car_check/(.*)', t_car_check),
+    url(r'^t_nh/(.*)', t_nh),
     url(r'^admin/', admin.site.urls),
     url(r'^trans/(.*)', trans_url),
     url(r'^notice/', notice),
@@ -44,4 +45,5 @@ urlpatterns = [
     url(r'^love/', love_index),
     url(r'^marry/', marry),
     url(r'^loveaction/(.*)$', love_action),
+    url(r'^tjbili/(.*)$', tjbili),
 ]

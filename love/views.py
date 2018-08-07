@@ -5,14 +5,17 @@ import logging
 import sys
 import traceback
 
-from django.http import HttpResponse
+import os
+from django.http import HttpResponse, FileResponse
 from django.shortcuts import render
 
 # Create your views here.
 from django.template.loader import get_template
+from scrapy import cmdline
 
 from love.models import ZF
 from tutils import t_url_tools
+from tutils.t_global_data import TGlobalData
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -99,3 +102,19 @@ def love_action(request, action):
         print s
         logging.debug(s)
         return HttpResponse(s)
+
+
+def tjbili(request, action):
+    # 开始爬虫
+    cmd = "cd " + TGlobalData.FILE_PATH + "../scrapy_test/  && dir && scrapy crawl lxdzx_bili"
+    p = os.popen(cmd)
+
+    down_file = open(TGlobalData.STATIC_FILE_PATH + '/lxdzx_bili.csv', 'rb')
+    response = FileResponse(down_file)
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="lxdzx_bili.csv"'
+    return response
+    # # 下载
+    # t = get_template("files/lxdzx_bili.csv")
+    # s = t.render()
+    # return HttpResponse(s)

@@ -39,3 +39,10 @@ def t_car_check(request, action):
     s = t.render()
     return HttpResponse(s)
 
+
+# 年会
+def t_nh(request, action):
+    page = 'nh/' + action + '.html'
+    t = get_template(page)
+    s = t.render()
+    return HttpResponse(s)
