@@ -45,5 +45,5 @@ urlpatterns = [
     url(r'^love/', love_index),
     url(r'^marry/', marry),
     url(r'^loveaction/(.*)$', love_action),
-    url(r'^tjbili/(.*)$', tjbili),
+    # url(r'^tjbili/(.*)$', tjbili),
 ]

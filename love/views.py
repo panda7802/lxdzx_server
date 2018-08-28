@@ -104,17 +104,22 @@ def love_action(request, action):
         return HttpResponse(s)
 
 
-def tjbili(request, action):
-    # 开始爬虫
-    cmd = "cd " + TGlobalData.FILE_PATH + "../scrapy_test/  && dir && scrapy crawl lxdzx_bili"
-    p = os.popen(cmd)
-
-    down_file = open(TGlobalData.STATIC_FILE_PATH + '/lxdzx_bili.csv', 'rb')
-    response = FileResponse(down_file)
-    response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = 'attachment;filename="lxdzx_bili.csv"'
-    return response
-    # # 下载
-    # t = get_template("files/lxdzx_bili.csv")
-    # s = t.render()
-    # return HttpResponse(s)
+# def tjbili(request, action):
+#     # 开始爬虫
+#     cmd = "cd " + TGlobalData.FILE_PATH + "../scrapy_test/  && scrapy crawl lxdzx_bili"
+#     os.popen(cmd)
+#
+#     t = get_template('scrapy_data/lxdzx.html')
+#     show_data = {}
+#     s = t.render(show_data)
+#     return HttpResponse(s)
+#
+#     # down_file = open(TGlobalData.STATIC_FILE_PATH + '/lxdzx_bili.csv', 'rb')
+#     # response = FileResponse(down_file)
+#     # response['Content-Type'] = 'application/octet-stream'
+#     # response['Content-Disposition'] = 'attachment;filename="lxdzx_bili.csv"'
+#     # return response
+#     # # 下载
+#     # t = get_template("files/lxdzx_bili.csv")
+#     # s = t.render()
+#     # return HttpResponse(s)

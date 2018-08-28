@@ -60,7 +60,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'video_manager.apps.VideoManagerConfig',
+    'get_web_data.apps.GetWebDataConfig',
     'love.apps.LoveConfig',
+    'trans.apps.TransConfig',
+    # 'scrapys.apps.ScrapysConfig',
+
 ]
 
 MIDDLEWARE = [
