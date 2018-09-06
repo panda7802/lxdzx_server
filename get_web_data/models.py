@@ -1,11 +1,63 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+
 from django.db import models
+from django.utils import timezone
+
 
 # Create your models here.
+class VideoNameInfos(models.Model):
+    """
+       平台分析
+       """
+    PLATFORM_SIDES = (
+        (1, 'B站'),
+        (2, '今日头条'),
+    )
+    IS_GET_DATA = (
+        (0, '是'),
+        (1, '否'),
+    )
+    platform = models.IntegerField('平台', choices=PLATFORM_SIDES, default=0)
+    name = models.CharField('名称', max_length=1023)
+    mid = models.CharField('本平台序号', max_length=1023, default=0)
+    get_data = models.IntegerField('是否爬虫', choices=IS_GET_DATA, default=0)
+    desc = models.CharField('描述', max_length=1023)
+
+    def __unicode__(self):
+        try:
+            s = filter(lambda item: item[0] == self.platform, self.PLATFORM_SIDES)[0][1] + " -- " + self.name
+        except Exception, e:
+            logging.error(str(e))
+            s = "get db err"
+        return s
+
+
+class PlatformStatistics(models.Model):
+    vid = models.ForeignKey(VideoNameInfos)
+    clicks = models.IntegerField('总点击量', default=0)
+    fans = models.IntegerField('总粉丝数', default=0)
+    follows = models.IntegerField('关注数', default=0)
+    reads = models.IntegerField('阅读数', default=0)
+    get_time = models.DateTimeField('保存日期', default=timezone.now)
+    bak = models.CharField('备注', max_length=1023)
+
+    def __unicode__(self):
+        try:
+            s = filter(lambda item: item[0] == self.vid.platform, VideoNameInfos.PLATFORM_SIDES)[0][1] \
+                + "-" + self.vid.name + "\t\t\t\t" + self.get_time.strftime("%Y-%m-%d %H:%M:%S")
+        except Exception, e:
+            logging.error(str(e))
+            s = "get db err"
+        return s
+
 
 class VideoList(models.Model):
+    """
+    视频列表
+    """
     title = models.CharField(max_length=255)  # 标题
     subtitle = models.CharField(max_length=255)  # 子标题
     comment = models.CharField(max_length=255)  # 评论数
@@ -26,3 +78,11 @@ class VideoList(models.Model):
     #
     gl_title = models.CharField(max_length=255)  # 关联标题
     gl_url = models.CharField(max_length=255)  # 关联url
+
+    def __unicode__(self):
+        try:
+            s = self.title
+        except Exception, e:
+            logging.error(str(e))
+            s = "get db err"
+        return s
