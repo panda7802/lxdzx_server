@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from get_web_data.views import get_dgtj
 from love.views import *
 from lxdzx_server import settings
 from trans.views import *
@@ -45,5 +46,6 @@ urlpatterns = [
     url(r'^love/', love_index),
     url(r'^marry/', marry),
     url(r'^loveaction/(.*)$', love_action),
+    url(r'^get_dgtj/(.*)$', get_dgtj)
     # url(r'^tjbili/(.*)$', tjbili),
 ]

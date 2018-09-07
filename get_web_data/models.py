@@ -37,10 +37,10 @@ class VideoNameInfos(models.Model):
 
 class PlatformStatistics(models.Model):
     vid = models.ForeignKey(VideoNameInfos)
-    clicks = models.IntegerField('总点击量', default=0)
-    fans = models.IntegerField('总粉丝数', default=0)
-    follows = models.IntegerField('关注数', default=0)
-    reads = models.IntegerField('阅读数', default=0)
+    clicks = models.BigIntegerField('总点击量', default=0)
+    fans = models.BigIntegerField('总粉丝数', default=0)
+    follows = models.BigIntegerField('关注数', default=0)
+    reads = models.BigIntegerField('阅读数', default=0)
     get_time = models.DateTimeField('保存日期', default=timezone.now)
     bak = models.CharField('备注', max_length=1023)
 

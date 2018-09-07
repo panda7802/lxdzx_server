@@ -22,8 +22,11 @@ def trans_url(request, url):
     s = ""
     try:
         # 解码两遍URL
+        logging.debug(request.get_host() + " -- " + request.get_full_path())
         python_obj = JSONDecoder().decode(url)
         url = urllib.unquote(python_obj['url'])
+        url = url.replace("tnbhh.cn","lai4.com.cn")
+        logging.debug("trans url : " + url)
         s = urllib2.urlopen(url).read()
     except Exception, e:
         s = "转发URL异常:" + url
