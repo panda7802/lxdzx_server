@@ -23,6 +23,7 @@ def get_dgtj(request, action):
         svid = json_obj['vid']
         vids = svid.split(",")
         response_data = []
+        s = ""
         for vid in vids:
             item = PlatformStatistics.objects.filter(vid_id=vid).first()
             # res_item = {'name': item.vid.name}
@@ -33,11 +34,14 @@ def get_dgtj(request, action):
             res_item['follows'] = item.follows
             res_item['reads'] = item.reads
             response_data.append(res_item)
-        s = t_url_tools.get_response_str(response_data)
+            # s = "平台：",res_item['name'],"点击量：" ,res_item['clicks'] ,""
+            sitem = "平台 ： %s\t\t  , 点击量：%s ，粉丝数：%s，关注数:%s ，阅读数:%s  <Br/>" % \
+                    (res_item['name'], res_item['clicks'], res_item['fans'], res_item['follows'], res_item['reads'])
+            s = s + sitem
+            # s = t_url_tools.get_response_str(response_data)
     except Exception, e:
         traceback.print_exc()
         s = t_url_tools.get_response_str({}, success=False, msg="get_dgtj 异常",
                                          err_code=t_url_tools.ERR_CODE_EXCEPTION)
     finally:
         return HttpResponse(s)
-

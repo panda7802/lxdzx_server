@@ -626,3 +626,10 @@ Set-Cookie: uid_tt=0770bb049be109862f86d88fe0c2fe92; Domain=.toutiao.com; Expire
 2018-09-07 17:29:04,927 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
 2018-09-07 17:29:19,384 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
 2018-09-07 17:29:43,938 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
+2018-09-07 17:36:16,917 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
+2018-09-07 17:36:49,801 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
+2018-09-07 17:37:50,775 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
+2018-09-07 17:38:55,630 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
+2018-09-07 17:39:04,904 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
+2018-09-07 17:39:20,746 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
+2018-09-07 17:40:07,637 [views:get_dgtj.16] [DEBUG]- /get_dgtj/?parm=%7B%22vid%22:%222,3%22%7D
