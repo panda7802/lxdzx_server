@@ -1,44 +1,34 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding=utf-8
 
 import logging
-import traceback
 
-from django.http import HttpResponse
-from django.shortcuts import render
-
-# Create your views here.
-from get_web_data.models import PlatformStatistics, VideoNameInfos
+from get_web_data.logic.actions import *
 from tutils import t_url_tools
+from tutils.t_url_tools import ERR_CODE_PARM
 
 
-def get_dgtj(request, action):
+def get_web_data(request, action):
+    """
+    获取网络请求
+    :param request:
+    :param action:
+    :return:
+    """
     logging.debug(request.get_full_path())
-    s = "[]"
+    # 校验
+    json_obj, session_res = t_url_tools.parse_url(request)
+    s = ""
+
     try:
-        json_obj, session_res = t_url_tools.parse_url(request, is_check_session=False)
         if not session_res:
             s = t_url_tools.get_session_err_res()
-            return
-        svid = json_obj['vid']
-        vids = svid.split(",")
-        response_data = []
-        s = ""
-        for vid in vids:
-            item = PlatformStatistics.objects.filter(vid_id=vid).first()
-            # res_item = {'name': item.vid.name}
-            res_item = {
-                'name': filter(lambda t: t[0] == item.vid.platform, VideoNameInfos.PLATFORM_SIDES)[0][1]}
-            res_item['clicks'] = item.clicks
-            res_item['fans'] = item.fans
-            res_item['follows'] = item.follows
-            res_item['reads'] = item.reads
-            response_data.append(res_item)
-            # s = "平台：",res_item['name'],"点击量：" ,res_item['clicks'] ,""
-            sitem = "平台 ： %s\t\t  , 点击量：%s ，粉丝数：%s，关注数:%s ，阅读数:%s  <Br/>" % \
-                    (res_item['name'], res_item['clicks'], res_item['fans'], res_item['follows'], res_item['reads'])
-            s = s + sitem
-            # s = t_url_tools.get_response_str(response_data)
+        else:
+            if action == "get_dgtj":
+                s = get_dgtj(json_obj)
+            elif action == "get_dgtj_echart":
+                s = get_dgtj_echart(json_obj)
+            else:
+                s = t_url_tools.get_response_str(None, msg=action + "不存在", err_code=ERR_CODE_PARM, success=False)
     except Exception, e:
         traceback.print_exc()
         s = t_url_tools.get_response_str({}, success=False, msg="get_dgtj 异常",
