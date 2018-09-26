@@ -53,4 +53,4 @@ http://127.0.0.1:8000/love/index.html
 http://127.0.0.1:8888/get_web_data/get_dgtj?parm={"vid":"2,3"}
 
 
-http://127.0.0.1:8888/get_web_data/get_dgtj_echart?parm={"vid":"2"}
+http://127.0.0.1:8888/get_web_data/get_dgtj_echart?parm={"vid":"2","start_time":"20180914000000","end_time":"20180926000000","type":1}

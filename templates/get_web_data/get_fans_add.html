@@ -14,7 +14,7 @@
 
     option = {
         title: {
-            text: '折线图堆叠'
+            text: '{{ tj_type }}'
         },
         tooltip: {
             trigger: 'axis'
@@ -39,26 +39,43 @@
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            {#                        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日',]#}
+            data: [{% for item in x_times %}
+                '{{ item.x_time }}\n{{ item.x_date }}',{% endfor %}]
         },
         yAxis: {
             type: 'value'
-        },
+        }
+        ,
         series: [
-            {
-                name: 'B站',
-                type: 'line',
-                stack: '播放量',
-                data: [120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name: '今日头条',
-                type: 'line',
-                stack: '播放量',
-                data: [220, 182, 191, 234, 290, 330, 310]
-            },
+            {% for item in datas %}
+                {
+                    name: '{{ item.name }}',
+                    type: 'line',
+                    stack: '播放量',
+                    data: [
+                        {% for son_item in item.platform_items %}
+                            {{ son_item.num }},
+                        {% endfor %}
+                    ]
+                }
+            {% endfor %}
+            {#            {#}
+            {#                name: 'B站',#}
+            {#                type: 'line',#}
+            {#                stack: '播放量',#}
+            {#                data: [120, 132, 101, 134, 90, 230, 210]#}
+            {#            }#}
+            {#            ,#}
+            {#            {#}
+            {#                name: '今日头条',#}
+            {#                type: 'line',#}
+            {#                stack: '播放量',#}
+            {#                data: [220, 182, 191, 234, 290, 330, 310]#}
+            {#            }#}
         ]
-    };
+    }
+    ;
 
 
     if (option && typeof option === "object") {
