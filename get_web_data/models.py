@@ -86,3 +86,24 @@ class VideoList(models.Model):
             logging.error(str(e))
             s = "get db err"
         return s
+
+
+class VideoDetail(models.Model):
+    """
+    视频详情
+    """
+    video = models.ForeignKey(VideoList)
+    comment = models.CharField(max_length=255)  # 评论数
+    video_review = models.CharField(max_length=255)  # 弹幕数
+    favorites = models.CharField(max_length=255)  # 收藏量
+    play = models.CharField(max_length=255)  # 播放量
+    get_time = models.DateTimeField('保存日期', default=timezone.now)
+    bak = models.CharField('备注', max_length=1023)
+
+    def __unicode__(self):
+        try:
+            s = self.video.title + " : " + str(self.play)
+        except Exception, e:
+            logging.error(str(e))
+            s = "get db err"
+        return s

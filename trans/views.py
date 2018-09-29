@@ -27,10 +27,14 @@ def trans_url(request, url):
         url = urllib.unquote(python_obj['url'])
         url = url.replace("tnbhh.cn","lai4.com.cn")
         logging.debug("trans url : " + url)
-        s = urllib2.urlopen(url).read()
+         
+        #s = urllib2.urlopen(url).read()
+        headers = {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'}
+        req = urllib2.Request(url=url,headers=headers)
+        s = urllib2.urlopen(req)    
     except Exception, e:
         s = "转发URL异常:" + url
-        print traceback.format_exc()
+        logging.exception(e)
     finally:
         return HttpResponse(s)
 
