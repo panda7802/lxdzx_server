@@ -27,6 +27,8 @@ def get_web_data(request, action):
                 s = get_dgtj(json_obj)
             elif action == "get_dgtj_echart":
                 s = get_dgtj_echart(json_obj)
+            elif action == "get_bili_video_tj_echart":
+                s = get_bili_video_tj_echart(json_obj)
             else:
                 s = t_url_tools.get_response_str(None, msg=action + "不存在", err_code=ERR_CODE_PARM, success=False)
     except Exception, e:

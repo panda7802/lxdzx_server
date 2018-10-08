@@ -98,7 +98,7 @@ class VideoDetail(models.Model):
     favorites = models.CharField(max_length=255)  # 收藏量
     play = models.CharField(max_length=255)  # 播放量
     get_time = models.DateTimeField('保存日期', default=timezone.now)
-    bak = models.CharField('备注', max_length=1023)
+    bak = models.CharField('备注内容', max_length=1023)
 
     def __unicode__(self):
         try:
